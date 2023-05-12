@@ -1,0 +1,15 @@
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.exe
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.deps.json
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.runtimeconfig.json
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.dll
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.pdb
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.csproj.AssemblyReference.cache
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.GeneratedMSBuildEditorConfig.editorconfig
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.AssemblyInfoInputs.cache
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.AssemblyInfo.cs
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.csproj.CoreCompileInputs.cache
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.dll
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\refint\Final Project x Boss.Az.dll
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.pdb
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.genruntimeconfig.cache
+D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\ref\Final Project x Boss.Az.dll
