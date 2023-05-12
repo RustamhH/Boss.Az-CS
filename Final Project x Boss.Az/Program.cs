@@ -16,21 +16,21 @@ namespace Final_Project_x_Boss.Az
 
         static void Main(string[] args)
         {
-
+            
 
             // Menu
 
 
             // Database
-                // Register methods
+            // Register methods
             // Mail Connections
             // Employer
-                // EditVacancy,ApplyToCV
+            // EditVacancy,ApplyToCV
             // Worker
-                // EditCV,ApplyToVacancy
+            // EditCV,ApplyToVacancy
 
 
-           
+
 
 
 

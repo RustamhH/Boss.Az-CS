@@ -43,7 +43,6 @@ namespace Final_Project_x_Boss.Az.Models
         }
          
         
-        // RegisterUser() 
         
         public void SaveWorkers()
         {

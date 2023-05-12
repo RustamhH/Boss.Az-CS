@@ -28,7 +28,7 @@ namespace Final_Project_x_Boss.Az.Models
                 op.WriteIndented = true;
                 File.WriteAllText(filePath, JsonSerializer.Serialize(values, op));
             }
-            catch (Exception ex) { Console.WriteLine(0); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
         }
 
 
