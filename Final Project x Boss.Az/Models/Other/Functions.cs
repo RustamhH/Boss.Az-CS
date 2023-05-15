@@ -196,6 +196,12 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 }
 
             }
+            else
+            {
+                Console.WriteLine("Verification code isn't correct");
+                Console.ReadKey(true);
+                return;
+            }
         }
 
         public static void CVCreation(ref Database database,Worker worker)

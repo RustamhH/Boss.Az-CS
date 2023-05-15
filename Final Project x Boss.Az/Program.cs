@@ -291,7 +291,7 @@ namespace Final_Project_x_Boss.Az
                                             }
                                             else if (EmployerChoice == 1)
                                             {
-
+                                                database.CurrentEmployer.VacancyCreation(ref database);
                                             }
                                             else if (EmployerChoice == 2)
                                             {

@@ -132,8 +132,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 if (item.Equals(user))
                 {
                     CurrentWorker = item;
-                    CurrentAdmin!.AddProcess(new Process($"{CurrentWorker.Username} logged into his/her account"));
-                    CurrentAdmin!.Notifications!.Add(new("New Login", $"{CurrentWorker.Username} logged into his/her account", CurrentWorker));
+                    DefaultAdmin!.AddProcess(new Process($"{CurrentWorker.Username} logged into his/her account"));
+                    DefaultAdmin!.Notifications!.Add(new("New Login", $"{CurrentWorker.Username} logged into his/her account", CurrentWorker));
                     return true;
                 }
             }
@@ -142,8 +142,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 if (item.Equals(user))
                 {
                     CurrentEmployer = item;
-                    CurrentAdmin!.Processes.Add(new Process($"{CurrentEmployer.Username} logged into his/her account"));
-                    CurrentAdmin!.Notifications!.Add(new("New Login", $"{CurrentEmployer.Username} logged into his/her account", CurrentEmployer));
+                    DefaultAdmin!.Processes.Add(new Process($"{CurrentEmployer.Username} logged into his/her account"));
+                    DefaultAdmin!.Notifications!.Add(new("New Login", $"{CurrentEmployer.Username} logged into his/her account", CurrentEmployer));
                     return true;
                 }
             }

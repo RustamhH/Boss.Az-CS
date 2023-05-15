@@ -83,7 +83,7 @@ namespace Final_Project_x_Boss.Az.Models
                     Console.Write("Lastly , Enter your requirements: ");
                     req = Console.ReadLine();
                 } while (req == null || req == "");
-
+                Console.Clear();
                 int PackageChoice = Print(new List<string> { "Normal [1 month]", "Premium [1 year]" },ref x,ref y);
                 if(PackageChoice==0)
                 {
@@ -101,6 +101,9 @@ namespace Final_Project_x_Boss.Az.Models
                 Vacancy vacancy = new(this, category, deadline, profession, salary, req, minage, maxage, degree, experincetime);
                 // admine notification gedib yoxlanilmali,eger admin qebul etse liste elave olunur,
                 // employere mail ve notification gedir , processlere elave olunur.
+                database.DefaultAdmin!.Notifications!.Add(new("New Vacancy Creation", $"{Username} created a new vacancy.Check your requests to verify this vacancy", this));
+                
+                
             }
 
 

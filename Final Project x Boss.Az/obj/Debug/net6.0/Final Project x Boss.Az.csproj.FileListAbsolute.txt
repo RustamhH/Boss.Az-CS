@@ -13,3 +13,18 @@ D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\refint\Fi
 D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.pdb
 D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.genruntimeconfig.cache
 D:\c#\Final Project x Boss.Az\Final Project x Boss.Az\obj\Debug\net6.0\ref\Final Project x Boss.Az.dll
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.exe
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.deps.json
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.runtimeconfig.json
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.dll
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\bin\Debug\net6.0\Final Project x Boss.Az.pdb
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.csproj.AssemblyReference.cache
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.AssemblyInfoInputs.cache
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.AssemblyInfo.cs
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.csproj.CoreCompileInputs.cache
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.dll
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\refint\Final Project x Boss.Az.dll
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.pdb
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\Final Project x Boss.Az.genruntimeconfig.cache
+C:\Users\Hesen_zc39\Desktop\Boss.Az-CS\Final Project x Boss.Az\obj\Debug\net6.0\ref\Final Project x Boss.Az.dll
