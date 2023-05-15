@@ -252,6 +252,32 @@ namespace Final_Project_x_Boss.Az.Models.Other
             SendMail(CurrentEmployer.Email, new("Vacancy deleted", $"Your vacancy with {id} has been deleted successfully", DefaultAdmin));
             DefaultAdmin.AddProcess(new($"{CurrentEmployer.Username} has deleted his/her vacancy with [{id}]"));
         }
+
+
+
+        public Worker FindWorkerById(string id)
+        {
+            foreach (var item in Workers)
+            {
+                if(item.Id.ToString()==id) return item;
+            }
+            throw new Exception("Worker Not Found");
+        }
+        
+        public Employer FindEmployerById(string id)
+        {
+            foreach (var item in Employers)
+            {
+                if(item.Id.ToString()==id) return item;
+            }
+            throw new Exception("Employer Not Found");
+        }
+
+
+
+
+
+
     }
 
 }

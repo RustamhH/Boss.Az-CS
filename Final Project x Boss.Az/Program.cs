@@ -143,11 +143,16 @@ namespace Final_Project_x_Boss.Az
                                     else if (AdminChoice == 4)
                                     {
                                         // request olunmus CV-ler
-
+                                        database.DefaultAdmin.ShowRequestedCVs();
+                                        string id=FixId();
+                                        database.DefaultAdmin.CheckCv(ref database, id);
                                     }
                                     else if (AdminChoice == 5)
                                     {
                                         // request olunmus Vacancy-ler
+                                        database.DefaultAdmin.ShowRequestedVacancies();
+                                        string id = FixId();
+                                        database.DefaultAdmin.CheckVacancy(ref database, id);
                                     }
                                     else if (AdminChoice == 6)
                                     {
@@ -291,7 +296,7 @@ namespace Final_Project_x_Boss.Az
                                             }
                                             else if (EmployerChoice == 1)
                                             {
-                                                database.CurrentEmployer.VacancyCreation(ref database);
+                                                database.CurrentEmployer!.VacancyCreation(ref database);
                                             }
                                             else if (EmployerChoice == 2)
                                             {
