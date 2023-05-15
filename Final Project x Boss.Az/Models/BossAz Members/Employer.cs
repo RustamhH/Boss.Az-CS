@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Final_Project_x_Boss.Az.Models.VacancyNamespace;
 using Final_Project_x_Boss.Az.Models.UserNamespace;
+using Final_Project_x_Boss.Az.Models.Other;
+using Final_Project_x_Boss.Az.Models.WorkerNamespace;
+using static Final_Project_x_Boss.Az.Models.Other.Functions;
+using System.Runtime.CompilerServices;
 
 namespace Final_Project_x_Boss.Az.Models
 {
@@ -20,6 +24,86 @@ namespace Final_Project_x_Boss.Az.Models
             {
 
             }
+
+
+            public void VacancyCreation(ref Database database)
+            {
+                
+                int x = 10, y = 2;
+                //////////////////
+                
+                
+                Categories category;
+                DateTime deadline;
+                string profession,degree,req;
+                double salary;
+                ushort minage, maxage;
+                int experincetime;
+                //////////////////////////
+                
+                int categoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(),ref x,ref y);
+                Enum.TryParse(categoryChoice.ToString(), out category);
+                do
+                {
+                    Console.Write("What profession should our applyer have? ");
+                    profession = Console.ReadLine();
+                } while (profession == null || profession == "");
+                
+                do
+                {
+                    Console.Write("How much salary do you offer to our applyer? ");
+                } while (!double.TryParse(Console.ReadLine(), out salary));
+
+                do
+                {
+                    do
+                    {
+                        Console.Write("What age should be our applyer (minimum age) ? ");
+                    } while (!ushort.TryParse(Console.ReadLine(), out minage));
+                    do
+                    {
+                        Console.Write("What age should be our applyer (maximum age) ? ");
+                    } while (!ushort.TryParse(Console.ReadLine(), out maxage));
+
+                } while (maxage<minage);
+
+                do
+                {
+                    Console.Write("What education degree should our applyer have? ");
+                    degree = Console.ReadLine();
+                } while (degree == null || degree == "");
+
+                do
+                {
+                    Console.Write("How much experienced should our applyer be ? ");
+                } while (!int.TryParse(Console.ReadLine(), out experincetime));
+
+                do
+                {
+                    Console.Write("Lastly , Enter your requirements: ");
+                    req = Console.ReadLine();
+                } while (req == null || req == "");
+
+                int PackageChoice = Print(new List<string> { "Normal [1 month]", "Premium [1 year]" },ref x,ref y);
+                if(PackageChoice==0)
+                {
+                    if (Budget < 10) return;
+                    Budget -= 10;
+                    deadline = DateTime.Now.AddMonths(1);
+                }
+                else
+                {
+                    if (Budget < 50) return;
+                    Budget -= 50;
+                    deadline = DateTime.Now.AddYears(1);
+                }
+
+                Vacancy vacancy = new(this, category, deadline, profession, salary, req, minage, maxage, degree, experincetime);
+                // admine notification gedib yoxlanilmali,eger admin qebul etse liste elave olunur,
+                // employere mail ve notification gedir , processlere elave olunur.
+            }
+
+
 
             public void AddVacancy(Vacancy vacancy)
             {
@@ -41,34 +125,7 @@ namespace Final_Project_x_Boss.Az.Models
                 }
                 throw new Exception("CV not found");
             }
-            public void EditVacancy(string id)
-            {
-
-            }
-            public void ChangeVacancyDeadline(string id)
-            {
-                foreach (var item in MyVacancies)
-                {
-                    if (item.Id.ToString() == id)
-                    {
-                        Budget -= 10;
-                        item.EndTime.AddMonths(1);
-                    }
-                }
-                throw new Exception("CV not found");
-            }
-            public void MakeVacancyPremium(string id)
-            {
-                foreach (var item in MyVacancies)
-                {
-                    if (item.Id.ToString() == id)
-                    {
-                        Budget -= 50;
-                        item.EndTime.AddYears(1);
-                    }
-                }
-                throw new Exception("Vacancy not found");
-            }
+            
 
             public void ShowMyVacancies()
             {
@@ -92,9 +149,23 @@ namespace Final_Project_x_Boss.Az.Models
             public override string ToString()
             {
                 string Text = base.ToString();
-                Text += $"Vacancies Count:{MyVacancies.Count}\n";
+                Text += $"\t\tVacancies Count:{MyVacancies.Count}\n";
                 return Text;
             }
+
+
+
+
+
+
+
+
+            
+
+
+
+
+            
         }
     }
     

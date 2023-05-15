@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Final_Project_x_Boss.Az.Models.Other;
 using Final_Project_x_Boss.Az.Models.WorkerNamespace;
 
 namespace Final_Project_x_Boss.Az.Models
@@ -15,19 +16,14 @@ namespace Final_Project_x_Boss.Az.Models
             private double _unigrade;
             private double _wantingsalary;
             private DateTime _endTime;
+            private string _gitlink;
+            private string _linkedin;
+
+
             public Worker Owner { get; set; }
             public Guid Id { get; init; }
             public Categories Category { get; init; }
             public DateTime StartTime { get; init; }
-            public DateTime EndTime
-            {
-                get => _endTime;
-                set
-                {
-                    if (value < DateTime.Now) throw new Exception("This CV is expired");
-                    _endTime = value;
-                }
-            }
 
             public string Profession { get; set; }
             public string School { get; set; }
@@ -35,8 +31,21 @@ namespace Final_Project_x_Boss.Az.Models
             public List<string> Companies { get; set; }
             public Dictionary<string, string> Languages { get; set; }
             public bool HasDiplom { get; set; }
-            public string GitLink { get; set; }
-            public string LinkedIn { get; set; }
+            public string LinkedIn { get=>_linkedin; set 
+                {
+                    if (!value.EndsWith("linkedin.com")) throw new Exception("Invalid Linkedin");
+                    _linkedin = value;
+                }
+            }
+            
+            
+            public string GitLink { get => _gitlink;
+                set
+                {
+                    if (!value.EndsWith("github.com")) throw new Exception("Invalid Git Link");
+                    _gitlink = value;
+                }
+            }
             public double WantingSalary
             {
                 get => _wantingsalary;
@@ -66,6 +75,17 @@ namespace Final_Project_x_Boss.Az.Models
                     _unigrade = value;
                 }
             }
+            public DateTime EndTime
+            {
+                get => _endTime;
+                set
+                {
+                    if (value < DateTime.Now) throw new Exception("This CV is expired");
+                    _endTime = value;
+                }
+            }
+
+
 
 
             public CV() { Id = Guid.NewGuid(); }
@@ -100,7 +120,7 @@ namespace Final_Project_x_Boss.Az.Models
             {
                 string MainText =
                 $@"
-        {Category}                                View Count: {ViewCount} | CV Id:{Id}                      
+        Category: {Category}                                View Count: {ViewCount} | CV Id:{Id}                      
             {Profession}
             {Owner.Name + " " + Owner.Surname} : {WantingSalary} AZN
             

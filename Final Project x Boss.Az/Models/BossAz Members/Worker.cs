@@ -1,4 +1,5 @@
 ﻿using Final_Project_x_Boss.Az.Models.CVNamespace;
+using Final_Project_x_Boss.Az.Models.Other;
 using Final_Project_x_Boss.Az.Models.UserNamespace;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace Final_Project_x_Boss.Az.Models
 
             public void AddCV(CV cv)
             {
+                // cin-den alinsin
                 foreach (var item in MyCVs)
                 {
                     if (item.Id == cv.Id) throw new Exception("This CV already exist");

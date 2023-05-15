@@ -14,6 +14,7 @@ using Final_Project_x_Boss.Az.Models.VacancyNamespace;
 using Final_Project_x_Boss.Az.Models.WorkerNamespace;
 using Final_Project_x_Boss.Az.Models.UserNamespace;
 using Final_Project_x_Boss.Az.Models.Services;
+using Final_Project_x_Boss.Az.Models.Other;
 
 namespace Final_Project_x_Boss.Az.Models
 {
@@ -138,7 +139,7 @@ namespace Final_Project_x_Boss.Az.Models
                 }
             }
 
-
+            
 
 
 

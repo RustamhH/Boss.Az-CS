@@ -7,7 +7,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using Final_Project_x_Boss.Az.Models.EmployerNamespace;
-
+using Final_Project_x_Boss.Az.Models.Other;
 
 namespace Final_Project_x_Boss.Az.Models
 {
@@ -26,8 +26,7 @@ namespace Final_Project_x_Boss.Az.Models
             public DateTime EndTime { get; set; }
             public string Profession { get; set; }
 
-            public List<string> Requirements { get; set; }
-            public string Location { get; set; }
+            public string Requirements { get; set; }
             public ushort MinimumAge { get; set; }
             public ushort MaximumAge { get; set; }
             public string Degree { get; set; }
@@ -83,12 +82,10 @@ namespace Final_Project_x_Boss.Az.Models
                     Start Time:{StartTime.Date.ToShortDateString()}
                     End Time:{EndTime.Date.ToShortDateString()}
                     
-                ";
-                MainText += "    Requirements\n";
-                foreach (var item in Requirements)
-                {
-                    MainText += "\t\t\t" + item + "\n";
-                }
+                            Requirements
+                    {Requirements}
+                    ";
+                
                 return MainText;
             }
 
@@ -107,26 +104,23 @@ namespace Final_Project_x_Boss.Az.Models
             }
             public Vacancy() { Id = Guid.NewGuid(); }
 
-            public Vacancy(Employer offerer, Categories category, DateTime endTime, int viewCount,
-            string profession, double offeredSalary, List<string> requirements, string location, ushort minimumAge,
+            public Vacancy(Employer offerer, Categories category, DateTime endTime,
+            string profession, double offeredSalary, string requirements,  ushort minimumAge,
             ushort maximumAge, string degree, int experienceTime) : this()
             {
                 Offerer = offerer;
                 Category = category;
                 StartTime = DateTime.Now;
                 EndTime = endTime;
-                ViewCount = viewCount;
+                ViewCount = 0;
                 Profession = profession;
                 OfferedSalary = offeredSalary;
                 Requirements = requirements;
-                Location = location;
                 MinimumAge = minimumAge;
                 MaximumAge = maximumAge;
                 Degree = degree;
                 ExperienceTime = experienceTime;
             }
-
-
         }
     }
     

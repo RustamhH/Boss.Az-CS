@@ -37,7 +37,7 @@ namespace Final_Project_x_Boss.Az.Models
                 get { return _email; }
                 set
                 {
-                    if (!value.EndsWith("@gmail.com") || value.Length <= 10) throw new Exception("Invalid Email");
+                    if (!value.EndsWith(".com") || !value.Contains('@')|| value.Length <= 10) throw new Exception("Invalid Email");
                     _email = value;
                 }
             }
@@ -101,6 +101,23 @@ namespace Final_Project_x_Boss.Az.Models
             {
                 return other.Email == Email && other.Password == Password;
             }
+
+
+            public void ShowMyNotifications()
+            {
+                if (Notifications != null)
+                {
+                    foreach (var item in Notifications!)
+                    {
+                        Console.WriteLine(item);
+                    }
+                }
+                
+            }
+
+
+
+
         }
 
     }
