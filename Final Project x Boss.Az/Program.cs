@@ -21,8 +21,8 @@ namespace Final_Project_x_Boss.Az
 
         static void Main(string[] args)
         {
+           
 
-            
             Database database = new();
             int mainx = 49, mainy = 13;
 
@@ -342,20 +342,37 @@ namespace Final_Project_x_Boss.Az
                 }
                 else if (MainChoice == 2)
                 {
+                    int searchx = 100, searchy = 2;
                     while(true)
                     {
                         int JobSearchChoices = Print(new List<string> { "CVs", "Vacancies","Exit" },ref mainx,ref mainy);
                         if (JobSearchChoices == 0)
                         {
-                            int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), ref mainx, ref mainy);
-                            //database.ShowVacancies();
-                            //Console.ReadKey(true);
+                            database.ShowVacancies();
+                            Console.Write("Press F to open filters: ");
+                            if (Console.ReadKey(true).Key == ConsoleKey.F)
+                            {
+                                Categories category;
+                                int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), ref searchx, ref searchy);
+                                Enum.TryParse(CategoryChoice.ToString(), out category);
+                                database.ShowVacancies(category);
+                            }
+                            
+                            Console.ReadKey(true);
                         }
                         else if (JobSearchChoices == 1)
                         {
-                            int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), ref mainx, ref mainy);
-                            //database.ShowCVs();
-                            //Console.ReadKey(true);
+                            database.ShowCVs();
+                            Console.Write("Press F to open filters: ");
+                            if (Console.ReadKey(true).Key == ConsoleKey.F)
+                            {
+                                Categories category;
+                                int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), ref searchx, ref searchy);
+                                Enum.TryParse(CategoryChoice.ToString(), out category);
+                                database.ShowCVs(category);
+                            }
+
+                            Console.ReadKey(true);
                         }
                         else break;
                     }

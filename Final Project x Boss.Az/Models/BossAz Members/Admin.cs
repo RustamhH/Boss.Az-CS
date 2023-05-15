@@ -23,7 +23,8 @@ namespace Final_Project_x_Boss.Az.Models
         internal sealed class Admin : Person
         {
             public List<Process> Processes { get; set; }
-
+            public Dictionary<Guid,Vacancy> RequestedVacancies { get; set; }
+            public Dictionary<Guid,CV> RequestedCV { get; set; }
             public Admin()
             {
                SetProcessesFromFile();
