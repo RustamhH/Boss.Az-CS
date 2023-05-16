@@ -98,7 +98,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             string? id;
             do
             {
-                Console.Write("Enter id to delete worker: ");
+                Console.Write("Enter id: ");
                 id = Console.ReadLine();
             } while (id == null || id == "");
             return id;
@@ -215,7 +215,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 while (true)
                 {
 
-                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Experience Time", "By Premium", "By View Count" }, searchx, searchy);
+                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Experience Time", "By Premium"}, searchx, searchy);
                     if (filteringchoice == 0)
                     {
                         Categories category;
@@ -226,19 +226,28 @@ namespace Final_Project_x_Boss.Az.Models.Other
                     }
                     else if(filteringchoice==1)
                     {
-
+                        double salary;
+                        do
+                        {
+                            Console.Write("Enter Minimum Salary: ");
+                        } while (!double.TryParse(Console.ReadLine(),out salary));
+                        database.ShowVacancies(salary);
+                        Console.ReadKey(true);
                     }
                     else if(filteringchoice==2)
                     {
-
+                        int extime;
+                        do
+                        {
+                            Console.Write("Enter Minimum Experience Time: ");
+                        } while (!int.TryParse(Console.ReadLine(), out extime));
+                        database.ShowVacancies(extime);
+                        Console.ReadKey(true);
                     }
                     else if(filteringchoice==3)
                     {
-
-                    }
-                    else if(filteringchoice==4)
-                    {
-
+                        database.ShowPremiumVacancies();
+                        Console.ReadKey(true);
                     }
                 }
             }

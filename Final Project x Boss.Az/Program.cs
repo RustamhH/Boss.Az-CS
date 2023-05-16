@@ -8,6 +8,7 @@ using Final_Project_x_Boss.Az.Models.EmployerNamespace;
 using System.Reflection;
 using Final_Project_x_Boss.Az.Models.Other;
 using System.Xml;
+using System.Transactions;
 
 namespace Final_Project_x_Boss.Az
 {
@@ -37,9 +38,20 @@ namespace Final_Project_x_Boss.Az
 
 
             // Employer
-                // EditVacancy,ApplyToCV
+                // ApplyToCV,CreateCV,CV filtration
             // Worker
-                // EditCV,ApplyToVacancy
+                // ApplyToVacancy
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -139,6 +151,19 @@ namespace Final_Project_x_Boss.Az
                                     else if (AdminChoice == 3)
                                     {
                                         // deadline -lari yoxlayir.
+                                        int deadlinechoice = Print(new List<string> { "Check Expired CVs", "Check Expired Vacancies" },mainx,mainy);
+                                        if(deadlinechoice==0)
+                                        {
+                                            database.CurrentAdmin!.CheckCVDeadlines(ref database);
+                                            Console.WriteLine("All vacancies have been checked");
+                                            Console.ReadKey(true);
+                                        }
+                                        else
+                                        {
+                                            database.CurrentAdmin!.CheckVacancyDeadlines(ref database);
+                                            Console.WriteLine("All vacancies have been checked");
+                                            Console.ReadKey(true);
+                                        }
                                     }
                                     else if (AdminChoice == 4)
                                     {
@@ -162,6 +187,7 @@ namespace Final_Project_x_Boss.Az
                                     else if (AdminChoice == 7)
                                     {
                                         Console.WriteLine(database.CurrentAdmin!);
+                                        database.CurrentAdmin!.AddProcess(new($"{database.CurrentAdmin.Username} checked his account"));
                                     }
                                     else break;
                                 }
@@ -232,19 +258,13 @@ namespace Final_Project_x_Boss.Az
                                             else if (WorkerChoice == 4)
                                             {
                                                 database.CurrentWorker!.ShowMyCVs();
+                                                database.DefaultAdmin.AddProcess(new($"{database.CurrentWorker.Username} checked his/her cv's"));
                                                 Console.ReadKey(true);
                                             }
                                             else if (WorkerChoice == 5)
                                             {
-
-                                            }
-                                            else if (WorkerChoice == 6)
-                                            {
-
-                                            }
-                                            else if (WorkerChoice == 7)
-                                            {
                                                 Console.WriteLine(database.CurrentWorker);
+                                                database.DefaultAdmin.AddProcess(new($"{database.CurrentWorker!.Username} checked his/her account"));
                                             }
                                             else break;
                                         }
@@ -316,14 +336,6 @@ namespace Final_Project_x_Boss.Az
                                             }
                                             else if (EmployerChoice == 5)
                                             {
-
-                                            }
-                                            else if (EmployerChoice == 6)
-                                            {
-
-                                            }
-                                            else if (EmployerChoice == 7)
-                                            {
                                                 Console.WriteLine(database.CurrentEmployer);
                                             }
                                             else break;
@@ -361,15 +373,6 @@ namespace Final_Project_x_Boss.Az
                         }
                         else if (JobSearchChoices == 1)
                         {
-                            //database.ShowCVs();
-                            //Console.Write("Press F to open filters: ");
-                            //if (Console.ReadKey(true).Key == ConsoleKey.F)
-                            //{
-                            //    Categories category;
-                            //    int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), ref searchx, ref searchy);
-                            //    Enum.TryParse(CategoryChoice.ToString(), out category);
-                            //    database.ShowCVs(category);
-                            //}
 
                             Console.ReadKey(true);
                         }

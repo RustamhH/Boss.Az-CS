@@ -13,6 +13,7 @@ using Final_Project_x_Boss.Az.Models.Services;
 using static Final_Project_x_Boss.Az.Models.Other.Functions;
 using System.Data;
 using System.Reflection.PortableExecutable;
+using System.Numerics;
 
 namespace Final_Project_x_Boss.Az.Models.Other
 {
@@ -66,6 +67,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             {
                 Console.WriteLine(item);
             }
+            CurrentAdmin!.AddProcess(new($"{CurrentAdmin.Username} viewed all workers"));
         }
 
 
@@ -75,6 +77,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             {
                 Console.WriteLine(item);
             }
+            CurrentAdmin!.AddProcess(new($"{CurrentAdmin.Username} viewed all employers"));
         }
 
         public void DeleteWorker(string id)
@@ -179,6 +182,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
         {
             foreach (var worker in Workers)
             {
+                worker.MyCVs.Sort((c1, c2) => c1.ViewCount.CompareTo(c2.ViewCount));
                 foreach (var cv in worker.MyCVs)
                 {
                     Console.WriteLine(cv);
@@ -194,6 +198,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             List<Worker> showList = Workers.Where(worker => worker.MyCVs.Any(cv => cv.Category == category)).ToList(); // with filter
             foreach (var worker in showList)
             {
+                worker.MyCVs.Sort((c1, c2) => c1.ViewCount.CompareTo(c2.ViewCount));
                 foreach (var cv in worker.MyCVs)
                 {
                     Console.WriteLine(cv);
@@ -207,6 +212,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
         {
             foreach (var employer in Employers)
             {
+                employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vacancy in employer.MyVacancies)
                 {
                     Console.WriteLine(vacancy);
@@ -221,6 +227,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.Category == category)).ToList(); // with filter
             foreach (var employer in showList)
             {
+                employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
                     Console.WriteLine(vac);
@@ -235,6 +242,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.OfferedSalary >= minimumSalary)).ToList(); // with filter
             foreach (var employer in showList)
             {
+                employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
                     Console.WriteLine(vac);
@@ -250,6 +258,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.ExperienceTime >= minimumexperiencetime)).ToList(); // with filter
             foreach (var employer in showList)
             {
+                employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
                     Console.WriteLine(vac);
@@ -265,6 +274,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.Package == Packages.Premium)).ToList(); // with filter
             foreach (var employer in showList)
             {
+                employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
                     Console.WriteLine(vac);
@@ -327,26 +337,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
 
-        public Worker FindWorkerById(string id)
-        {
-            foreach (var item in Workers)
-            {
-                if(item.Id.ToString()==id) return item;
-            }
-            throw new Exception("Worker Not Found");
-        }
         
-        public Employer FindEmployerById(string id)
-        {
-            foreach (var item in Employers)
-            {
-                if(item.Id.ToString()==id) return item;
-            }
-            throw new Exception("Employer Not Found");
-        }
-
-
-
 
 
 
