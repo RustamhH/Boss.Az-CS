@@ -172,11 +172,26 @@ namespace Final_Project_x_Boss.Az.Models.Other
         }
 
 
-        public void ShowCVs(Categories category=default)
+
+
+
+        public void ShowCVs()
         {
-            List<Worker> showList = null;
-            if (category != default) showList = Workers.Where(worker => worker.MyCVs.Any(cv => cv.Category == category)).ToList(); // with filter
-            else showList = Workers;
+            foreach (var worker in Workers)
+            {
+                foreach (var cv in worker.MyCVs)
+                {
+                    Console.WriteLine(cv);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+
+
+        public void ShowCVs(Categories category)
+        {
+            List<Worker> showList = Workers.Where(worker => worker.MyCVs.Any(cv => cv.Category == category)).ToList(); // with filter
             foreach (var worker in showList)
             {
                 foreach (var cv in worker.MyCVs)
@@ -187,14 +202,70 @@ namespace Final_Project_x_Boss.Az.Models.Other
             }
         }
 
-        public void ShowVacancies(Categories category=default)
+        // Show with no Filter
+        public void ShowVacancies()
         {
-            List<Employer> showList = null;
-            if (category != default) showList = Employers.Where(worker => worker.MyVacancies.Any(cv => cv.Category == category)).ToList(); // with filter
-            else showList = Employers;
-            foreach (var worker in showList)
+            foreach (var employer in Employers)
             {
-                foreach (var vac in worker.MyVacancies)
+                foreach (var vacancy in employer.MyVacancies)
+                {
+                    Console.WriteLine(vacancy);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        // Show specific Category
+        public void ShowVacancies(Categories category)
+        {
+            List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.Category == category)).ToList(); // with filter
+            foreach (var employer in showList)
+            {
+                foreach (var vac in employer.MyVacancies)
+                {
+                    Console.WriteLine(vac);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        // Show above specific Salary
+        public void ShowVacancies(double minimumSalary)
+        {
+            List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.OfferedSalary >= minimumSalary)).ToList(); // with filter
+            foreach (var employer in showList)
+            {
+                foreach (var vac in employer.MyVacancies)
+                {
+                    Console.WriteLine(vac);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+
+        // Show above specific Experience time
+        public void ShowVacancies(int minimumexperiencetime)
+        {
+            List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.ExperienceTime >= minimumexperiencetime)).ToList(); // with filter
+            foreach (var employer in showList)
+            {
+                foreach (var vac in employer.MyVacancies)
+                {
+                    Console.WriteLine(vac);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+
+        // Show only Premium Vacancies
+        public void ShowPremiumVacancies()
+        {
+            List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.Package == Packages.Premium)).ToList(); // with filter
+            foreach (var employer in showList)
+            {
+                foreach (var vac in employer.MyVacancies)
                 {
                     Console.WriteLine(vac);
                     Console.WriteLine();
@@ -221,6 +292,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
         public void WorkerCvDeletion(string id)
         {
+
             try
             {
                 CurrentWorker!.DeleteCVbyID(id);

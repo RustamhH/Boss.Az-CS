@@ -34,7 +34,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             };
             smtpClient.Send(message);
         }
-        public static int Print<T>(List<T> arr, ref int x, ref int y)
+        public static int Print<T>(List<T> arr, int x, int y)
         {
             int index = 0;
             while (true)
@@ -203,6 +203,57 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 return;
             }
         }
+
+
+
+        public static void VacancySearchAlgorithm(ref Database database)
+        {
+            int searchx = 100, searchy = 2;
+            int filterornot = Print(new List<string> { "Use filter", "Don't use filter" }, searchx, searchy);
+            if (filterornot == 0)
+            {
+                while (true)
+                {
+
+                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Experience Time", "By Premium", "By View Count" }, searchx, searchy);
+                    if (filteringchoice == 0)
+                    {
+                        Categories category;
+                        int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), searchx, searchy);
+                        Enum.TryParse(CategoryChoice.ToString(), out category);
+                        database.ShowVacancies(category);
+                        Console.ReadKey(true);
+                    }
+                    else if(filteringchoice==1)
+                    {
+
+                    }
+                    else if(filteringchoice==2)
+                    {
+
+                    }
+                    else if(filteringchoice==3)
+                    {
+
+                    }
+                    else if(filteringchoice==4)
+                    {
+
+                    }
+                }
+            }
+            else
+            {
+                database.ShowVacancies();
+                Console.ReadKey(true);
+            }
+        }
+
+
+
+
+
+
 
         public static void CVCreation(ref Database database,Worker worker)
         {

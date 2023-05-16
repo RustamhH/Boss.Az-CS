@@ -73,11 +73,12 @@ namespace Final_Project_x_Boss.Az.Models
                 throw new Exception("CV not found");
             }
 
-            public void ShowMyCVs()
+            public void ShowMyCVs(bool isLong=true)
             {
                 foreach (var item in MyCVs)
                 {
-                    Console.WriteLine(item);
+                    if(isLong) Console.WriteLine(item);
+                    else Console.WriteLine(item.ShortInfo()); 
                 }
             }
 

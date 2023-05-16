@@ -46,14 +46,14 @@ namespace Final_Project_x_Boss.Az
 
             while (true)
             {
-                int MainChoice = Print(new List<string> { "Admin", "User", "Job Postings", "Exit" }, ref mainx, ref mainy);
+                int MainChoice = Print(new List<string> { "Admin", "User", "Job Postings", "Exit" },  mainx,  mainy);
 
                 if (MainChoice == 0)
                 {
                     while (true)
                     {
                         
-                        int SignChoice = Print(new List<string> { "Login", "Exit" }, ref mainx, ref mainy);
+                        int SignChoice = Print(new List<string> { "Login", "Exit" }, mainx,  mainy);
                         if (SignChoice == 0)
                         {
                             Admin admin = new();
@@ -75,7 +75,7 @@ namespace Final_Project_x_Boss.Az
 
                                 while (true)
                                 {
-                                    int AdminChoice = Print(new List<string> { "Notifications", "Show User", "Delete User", "Check Deadlines", "Check CVs", "Check Vacancies", "Show Previous Processes", "My Account", "Exit" }, ref mainx, ref mainy);
+                                    int AdminChoice = Print(new List<string> { "Notifications", "Show User", "Delete User", "Check Deadlines", "Check CVs", "Check Vacancies", "Show Previous Processes", "My Account", "Exit" },  mainx,  mainy);
                                     if (AdminChoice == 0)
                                     {
                                         database.CurrentAdmin!.ShowMyNotifications();
@@ -86,7 +86,7 @@ namespace Final_Project_x_Boss.Az
 
                                         while (true)
                                         {
-                                            int ShowUserChoice = Print(new List<string> { "Show Worker", "Show Employer", "Exit" }, ref mainx, ref mainy);
+                                            int ShowUserChoice = Print(new List<string> { "Show Worker", "Show Employer", "Exit" },  mainx,  mainy);
                                             if (ShowUserChoice == 0)
                                             {
                                                 database.ReadWorkers();
@@ -104,7 +104,7 @@ namespace Final_Project_x_Boss.Az
                                     {
                                         while (true)
                                         {
-                                            int DeleteUserChoice = Print(new List<string> { "Delete Worker", "Delete Employer", "Exit" }, ref mainx, ref mainy);
+                                            int DeleteUserChoice = Print(new List<string> { "Delete Worker", "Delete Employer", "Exit" },  mainx,  mainy);
                                             if (DeleteUserChoice == 0)
                                             {
                                                 database.ReadWorkers();
@@ -145,7 +145,7 @@ namespace Final_Project_x_Boss.Az
                                         // request olunmus CV-ler
                                         database.DefaultAdmin.ShowRequestedCVs();
                                         string id=FixId();
-                                        database.DefaultAdmin.CheckCv(ref database, id);
+                                        database.DefaultAdmin.CheckCv(ref  database, id);
                                     }
                                     else if (AdminChoice == 5)
                                     {
@@ -183,13 +183,13 @@ namespace Final_Project_x_Boss.Az
                     {
 
                         User user = null;
-                        int UserChoice = Print(new List<string> { "Worker", "Employer", "Exit" }, ref mainx, ref mainy);
+                        int UserChoice = Print(new List<string> { "Worker", "Employer", "Exit" }, mainx,  mainy);
                         if (UserChoice == 0)
                         {
                             while (true)
                             {
                                 user = new Worker();
-                                int SignChoice = Print(new List<string> { "Login", "Register", "Exit" }, ref mainx, ref mainy);
+                                int SignChoice = Print(new List<string> { "Login", "Register", "Exit" },  mainx,  mainy);
                                 if (SignChoice == 0)
                                 {
                                     try
@@ -209,7 +209,7 @@ namespace Final_Project_x_Boss.Az
                                     {
                                         while (true)
                                         {
-                                            int WorkerChoice = Print(new List<string> { "Notifications", "Add CV", "Delete CV", "Vacancies", "Show My CVs","Make CV Premium","Extend CV Deadline","My Account", "Exit" }, ref mainx, ref mainy);
+                                            int WorkerChoice = Print(new List<string> { "Notifications", "Add CV", "Delete CV", "Vacancies", "Show My CVs","My Account", "Exit" },  mainx,  mainy);
                                             if (WorkerChoice == 0)
                                             {
                                                 database.CurrentWorker!.ShowMyNotifications();
@@ -221,6 +221,7 @@ namespace Final_Project_x_Boss.Az
                                             }
                                             else if (WorkerChoice == 2)
                                             {
+                                                database.CurrentWorker!.ShowMyCVs(false);
                                                 string deleteId = FixId();
                                                 database.WorkerCvDeletion(deleteId);
                                             }
@@ -268,7 +269,7 @@ namespace Final_Project_x_Boss.Az
                             while (true)
                             {
                                 user = new Employer();
-                                int SignChoice = Print(new List<string> { "Login", "Register", "Exit" }, ref mainx, ref mainy);
+                                int SignChoice = Print(new List<string> { "Login", "Register", "Exit" }, mainx, mainy);
                                 if (SignChoice == 0)
                                 {
                                     try
@@ -288,7 +289,7 @@ namespace Final_Project_x_Boss.Az
                                     {
                                         while (true)
                                         {
-                                            int EmployerChoice = Print(new List<string> { "Notifications", "Add Vacancy", "Delete Vacancy", "CVs","Show My Vacancies", "My Account", "Exit" }, ref mainx, ref mainy);
+                                            int EmployerChoice = Print(new List<string> { "Notifications", "Add Vacancy", "Delete Vacancy", "CVs","Show My Vacancies", "My Account", "Exit" },  mainx,  mainy);
                                             if (EmployerChoice == 0)
                                             {
                                                 database.CurrentEmployer!.ShowMyNotifications();
@@ -300,6 +301,7 @@ namespace Final_Project_x_Boss.Az
                                             }
                                             else if (EmployerChoice == 2)
                                             {
+                                                database.CurrentEmployer!.ShowMyVacancies(false);
                                                 string deleteId = FixId();
                                                 database.EmployerVacancyDeletion(deleteId);
                                             }
@@ -347,35 +349,27 @@ namespace Final_Project_x_Boss.Az
                 }
                 else if (MainChoice == 2)
                 {
-                    int searchx = 100, searchy = 2;
                     while(true)
                     {
-                        int JobSearchChoices = Print(new List<string> { "CVs", "Vacancies","Exit" },ref mainx,ref mainy);
+                        int JobSearchChoices = Print(new List<string> { "CVs", "Vacancies","Exit" },mainx,mainy);
                         if (JobSearchChoices == 0)
                         {
-                            database.ShowVacancies();
-                            Console.Write("Press F to open filters: ");
-                            if (Console.ReadKey(true).Key == ConsoleKey.F)
-                            {
-                                Categories category;
-                                int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), ref searchx, ref searchy);
-                                Enum.TryParse(CategoryChoice.ToString(), out category);
-                                database.ShowVacancies(category);
-                            }
+                            
+                            
                             
                             Console.ReadKey(true);
                         }
                         else if (JobSearchChoices == 1)
                         {
-                            database.ShowCVs();
-                            Console.Write("Press F to open filters: ");
-                            if (Console.ReadKey(true).Key == ConsoleKey.F)
-                            {
-                                Categories category;
-                                int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), ref searchx, ref searchy);
-                                Enum.TryParse(CategoryChoice.ToString(), out category);
-                                database.ShowCVs(category);
-                            }
+                            //database.ShowCVs();
+                            //Console.Write("Press F to open filters: ");
+                            //if (Console.ReadKey(true).Key == ConsoleKey.F)
+                            //{
+                            //    Categories category;
+                            //    int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), ref searchx, ref searchy);
+                            //    Enum.TryParse(CategoryChoice.ToString(), out category);
+                            //    database.ShowCVs(category);
+                            //}
 
                             Console.ReadKey(true);
                         }

@@ -25,6 +25,7 @@ namespace Final_Project_x_Boss.Az.Models
             public Categories Category { get; init; }
             public DateTime StartTime { get; init; }
 
+            public Packages Package { get; set; }
             public string Profession { get; set; }
             public string School { get; set; }
             public List<string> Skills { get; set; }
@@ -93,7 +94,7 @@ namespace Final_Project_x_Boss.Az.Models
             public CV(Worker owner, Categories category, string school, double universityAcceptanceGrade,
                   List<string> skills, List<string> companies,
                   DateTime endDate, Dictionary<string, string> languages,
-                  bool hasDiploma, int viewcount, string prof, string gitLink, string linkedIn, double wantingSalary) : this()
+                  bool hasDiploma, int viewcount, string prof, string gitLink, string linkedIn, double wantingSalary,Packages package) : this()
             {
                 Owner = owner;
                 Category = category;
@@ -110,6 +111,7 @@ namespace Final_Project_x_Boss.Az.Models
                 WantingSalary = wantingSalary;
                 ViewCount = viewcount;
                 Profession = prof;
+                Package = package;
             }
 
 
@@ -120,7 +122,7 @@ namespace Final_Project_x_Boss.Az.Models
             {
                 string MainText =
                 $@"
-        Category: {Category}                                View Count: {ViewCount} | CV Id:{Id}                      
+        Category: {Category}                                View Count: {ViewCount} | CV Id:{Id} | {Package} package CV                      
             {Profession}
             {Owner.Name + " " + Owner.Surname} : {WantingSalary} AZN
             
@@ -158,6 +160,7 @@ namespace Final_Project_x_Boss.Az.Models
             public string ShortInfo()
             {
                 return $@"
+            {Id}
             {Profession}
             {WantingSalary} AZN
             {Owner.Name + " " + Owner.Surname}

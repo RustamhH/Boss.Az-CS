@@ -122,7 +122,7 @@ namespace Final_Project_x_Boss.Az.Models
                         }
                         Notification not = default;
                         int x = 66, y = 11;
-                        int choice = Functions.Print(new List<string> { "Vacancy Appropriate", "Vacancy Inappropriate" }, ref x, ref y);
+                        int choice = Functions.Print(new List<string> { "Vacancy Appropriate", "Vacancy Inappropriate" }, x, y);
                         if (choice == 0)
                         {
                             AddProcess(new Process($"Admin {Username} accepted employer {employer.Username}'s vacancy request"));
@@ -167,7 +167,7 @@ namespace Final_Project_x_Boss.Az.Models
                         }
                         Notification not = default;
                         int x = 66, y = 11;
-                        int choice = Functions.Print(new List<string> { "CV Appropriate", "CV Inappropriate" }, ref x, ref y);
+                        int choice = Functions.Print(new List<string> { "CV Appropriate", "CV Inappropriate" }, x, y);
                         if (choice == 0)
                         {
                             AddProcess(new Process($"Admin {Username} accepted worker {worker.Username}'s CV request"));

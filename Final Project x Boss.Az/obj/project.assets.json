@@ -8,24 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Hesen_zc39\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\RustamH\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hesen_zc39\\Desktop\\Boss.Az-CS\\Final Project x Boss.Az\\Final Project x Boss.Az.csproj",
+      "projectUniqueName": "D:\\c#\\Final Project x Boss.Az\\Final Project x Boss.Az\\Final Project x Boss.Az.csproj",
       "projectName": "Final Project x Boss.Az",
-      "projectPath": "C:\\Users\\Hesen_zc39\\Desktop\\Boss.Az-CS\\Final Project x Boss.Az\\Final Project x Boss.Az.csproj",
-      "packagesPath": "C:\\Users\\Hesen_zc39\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hesen_zc39\\Desktop\\Boss.Az-CS\\Final Project x Boss.Az\\obj\\",
+      "projectPath": "D:\\c#\\Final Project x Boss.Az\\Final Project x Boss.Az\\Final Project x Boss.Az.csproj",
+      "packagesPath": "C:\\Users\\RustamH\\.nuget\\packages\\",
+      "outputPath": "D:\\c#\\Final Project x Boss.Az\\Final Project x Boss.Az\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Hesen_zc39\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\RustamH\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

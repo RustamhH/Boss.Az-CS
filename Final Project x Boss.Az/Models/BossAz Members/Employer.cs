@@ -34,6 +34,7 @@ namespace Final_Project_x_Boss.Az.Models
                 
                 
                 Categories category;
+                Packages package;
                 DateTime deadline;
                 string profession,degree,req;
                 double salary;
@@ -41,7 +42,7 @@ namespace Final_Project_x_Boss.Az.Models
                 int experincetime;
                 //////////////////////////
                 
-                int categoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(),ref x,ref y);
+                int categoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(),x,y);
                 Enum.TryParse(categoryChoice.ToString(), out category);
                 do
                 {
@@ -84,21 +85,23 @@ namespace Final_Project_x_Boss.Az.Models
                     req = Console.ReadLine();
                 } while (req == null || req == "");
                 Console.Clear();
-                int PackageChoice = Print(new List<string> { "Normal [1 month]", "Premium [1 year]" },ref x,ref y);
+                int PackageChoice = Print(new List<string> { "Normal [1 month]", "Premium [1 year]" },x,y);
                 if(PackageChoice==0)
                 {
                     if (Budget < 10) return;
                     Budget -= 10;
                     deadline = DateTime.Now.AddMonths(1);
+                    package = Packages.Basic;
                 }
                 else
                 {
                     if (Budget < 50) return;
                     Budget -= 50;
                     deadline = DateTime.Now.AddYears(1);
+                    package = Packages.Premium;
                 }
 
-                Vacancy vacancy = new(this, category, deadline, profession, salary, req, minage, maxage, degree, experincetime);
+                Vacancy vacancy = new(this, category, deadline, profession, salary, req, minage, maxage, degree, experincetime,package);
                 // admine notification gedib yoxlanilmali,eger admin qebul etse liste elave olunur,
                 // employere mail ve notification gedir , processlere elave olunur.
                 database.DefaultAdmin!.Notifications!.Add(new("New Vacancy Creation", $"{Username} created a new vacancy.Check your requests to verify this vacancy", this));
@@ -129,11 +132,12 @@ namespace Final_Project_x_Boss.Az.Models
             }
             
 
-            public void ShowMyVacancies()
+            public void ShowMyVacancies(bool isLong=true)
             {
                 foreach (var item in MyVacancies)
                 {
-                    Console.WriteLine(item);
+                    if(isLong) Console.WriteLine(item);
+                    else Console.WriteLine(item.ShortInfo());
                 }
             }
 

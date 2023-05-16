@@ -26,6 +26,7 @@ namespace Final_Project_x_Boss.Az.Models
             public DateTime EndTime { get; set; }
             public string Profession { get; set; }
 
+            public Packages Package { get; set; }
             public string Requirements { get; set; }
             public ushort MinimumAge { get; set; }
             public ushort MaximumAge { get; set; }
@@ -72,7 +73,7 @@ namespace Final_Project_x_Boss.Az.Models
             {
                 string MainText =
                     $@"
-                Category:{Category}                     View Count:{ViewCount} | Vacancy Id:{Id}
+                Category:{Category}                     View Count:{ViewCount} | Vacancy Id:{Id} | {Package} package vacancy
                     Profession:{Profession}             Phone:{Offerer.Phone}
                     Offered Salary:{OfferedSalary}                 E-Mail:{Offerer.Email}
                     Offerer:{Offerer.Name + " " + Offerer.Surname}
@@ -97,6 +98,7 @@ namespace Final_Project_x_Boss.Az.Models
             public string ShortInfo()
             {
                 return $@"
+            {Id}
             {Profession}
             {OfferedSalary} AZN
             {Offerer.Name + " " + Offerer.Surname}
@@ -106,7 +108,7 @@ namespace Final_Project_x_Boss.Az.Models
 
             public Vacancy(Employer offerer, Categories category, DateTime endTime,
             string profession, double offeredSalary, string requirements,  ushort minimumAge,
-            ushort maximumAge, string degree, int experienceTime) : this()
+            ushort maximumAge, string degree, int experienceTime, Packages package) : this()
             {
                 Offerer = offerer;
                 Category = category;
@@ -120,6 +122,7 @@ namespace Final_Project_x_Boss.Az.Models
                 MaximumAge = maximumAge;
                 Degree = degree;
                 ExperienceTime = experienceTime;
+                Package = package;
             }
         }
     }
