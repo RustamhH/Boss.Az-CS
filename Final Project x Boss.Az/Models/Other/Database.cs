@@ -177,7 +177,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
 
-
+        // no filter
         public void ShowCVs()
         {
             foreach (var worker in Workers)
@@ -192,7 +192,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
         }
 
 
-
+        // category filter
         public void ShowCVs(Categories category)
         {
             List<Worker> showList = Workers.Where(worker => worker.MyCVs.Any(cv => cv.Category == category)).ToList(); // with filter
@@ -206,6 +206,51 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 }
             }
         }
+
+
+        // salary filter
+        public void ShowCVs(double minimumsalary) 
+        {
+            List<Worker> showList = Workers.Where(worker => worker.MyCVs.Any(cv => cv.WantingSalary >= minimumsalary)).ToList(); // with filter
+            foreach (var worker in showList)
+            {
+                worker.MyCVs.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
+                foreach (var cv in worker.MyCVs)
+                {
+                    Console.WriteLine(cv);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+        // premium cv
+        public void ShowPremiumCVs()
+        {
+            List<Worker> showList = Workers.Where(worker => worker.MyCVs.Any(cv => cv.Package == Packages.Premium)).ToList(); // with filter
+            foreach (var worker in showList)
+            {
+                worker.MyCVs.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
+                foreach (var cv in worker.MyCVs)
+                {
+                    Console.WriteLine(cv);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+
+
+
 
         // Show with no Filter
         public void ShowVacancies()

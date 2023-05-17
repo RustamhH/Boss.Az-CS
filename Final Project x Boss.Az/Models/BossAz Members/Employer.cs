@@ -9,6 +9,7 @@ using Final_Project_x_Boss.Az.Models.Other;
 using Final_Project_x_Boss.Az.Models.WorkerNamespace;
 using static Final_Project_x_Boss.Az.Models.Other.Functions;
 using System.Runtime.CompilerServices;
+using Final_Project_x_Boss.Az.Models.NotificationNamespace;
 
 namespace Final_Project_x_Boss.Az.Models
 {
@@ -20,9 +21,24 @@ namespace Final_Project_x_Boss.Az.Models
 
 
 
-            public void Apply()
+            public void Apply(ref Database database)
             {
-
+                CVSearchAlgorithm(ref database);
+                string applyid = FixId();
+                foreach (var worker in database.Workers)
+                {
+                    foreach (var cv in worker.MyCVs)
+                    {
+                        if(cv.Id.ToString()==applyid)
+                        {
+                            // processlere elave olunsun , workerin notificationu ve maili
+                            Notification notification = new("New Request", $"Dear {worker.Username} , your CV with [{applyid}] id applied by our company . See you in interview . Best regards , {Username}", this);
+                            worker.Notifications!.Add(notification);
+                            SendMail(worker.Email, notification);
+                            database.DefaultAdmin.AddProcess(new($"{Username} applyed {worker.Username} s CV with [{applyid}] id"));
+                        }
+                    }
+                }
             }
 
 
@@ -35,7 +51,6 @@ namespace Final_Project_x_Boss.Az.Models
                 
                 Categories category;
                 Packages package;
-                DateTime deadline;
                 string profession,degree,req;
                 double salary;
                 ushort minage, maxage;
@@ -90,22 +105,29 @@ namespace Final_Project_x_Boss.Az.Models
                 {
                     if (Budget < 10) return;
                     Budget -= 10;
-                    deadline = DateTime.Now.AddMonths(1);
                     package = Packages.Basic;
                 }
                 else
                 {
                     if (Budget < 50) return;
                     Budget -= 50;
-                    deadline = DateTime.Now.AddYears(1);
                     package = Packages.Premium;
                 }
-
-                Vacancy vacancy = new(this, category, deadline, profession, salary, req, minage, maxage, degree, experincetime,package);
+                Vacancy vacancy;
+                try
+                {
+                    vacancy = new(this, category, profession, salary, req, minage, maxage, degree, experincetime,package);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.ReadKey(true);
+                    return;
+                }
                 // admine notification gedib yoxlanilmali,eger admin qebul etse liste elave olunur,
                 // employere mail ve notification gedir , processlere elave olunur.
                 database.DefaultAdmin!.Notifications!.Add(new("New Vacancy Creation", $"{Username} created a new vacancy.Check your requests to verify this vacancy", this));
-                database.DefaultAdmin!.RequestedVacancies.Add(Id, vacancy);
+                database.DefaultAdmin!.RequestedVacancies.Add(vacancy);
             }
 
 

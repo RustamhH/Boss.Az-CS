@@ -97,12 +97,12 @@ namespace Final_Project_x_Boss.Az.Models
                 {
                     foreach (var vacancy in employer.MyVacancies)
                     {
-                        if(vacancy.EndTime<=DateTime.Now)
+                        if(vacancy.EndTime>DateTime.Now)
                         {
                             employer.DeleteVacancybyID(vacancy.Id.ToString());
                             Notification not=new("Expired Vacancy", $"Dear {employer.Username},your vacancy about {vacancy.Category} has been deleted due to expiring by Boss.Az admins", this);
                             employer.Notifications.Add(not);
-                            AddProcess(new Process($"Admin {Username} deleted employer {employer.Username}'s  {vacancy.Id} vacancy"));
+                            AddProcess(new Process($"Admin {Username} deleted employer {employer.Username}'s  {vacancy.Id} vacancy "));
                             Functions.SendMail(employer.Email, not);
                         }
                     }
@@ -114,12 +114,12 @@ namespace Final_Project_x_Boss.Az.Models
                 {
                     foreach (var CV in worker.MyCVs)
                     {
-                        if(CV.EndTime<=DateTime.Now)
+                        if(CV.EndTime>DateTime.Now)
                         {
                             worker.DeleteCVbyID(CV.Id.ToString());
                             Notification not = new("Expired CV", $"Dear {worker.Username},your CV about {CV.Category} has been deleted due to expiring by Boss.Az admins", this);
                             worker.Notifications!.Add(not);
-                            AddProcess(new Process($"Admin {Username} deleted worker {worker.Username}'s  {CV.Id} vacancy"));
+                            AddProcess(new Process($"Admin {Username} deleted worker {worker.Username}'s  {CV.Id} CV due to expiring"));
                             Functions.SendMail(worker.Email, not);
                         }
                     }
@@ -151,6 +151,7 @@ namespace Final_Project_x_Boss.Az.Models
                                 item.Offerer.Notifications!.Add(not);
                                 Functions.SendMail(item.Offerer.Email, not);
                                 item.Offerer.AddVacancy(item);
+                                database.SaveEmployers();
                                 return;
                             }
 
@@ -174,8 +175,6 @@ namespace Final_Project_x_Boss.Az.Models
                     }
                 }
             }
-
-
             public void CheckCv(ref Database database,string cvid)
             {
                 foreach (var item in RequestedCV)
@@ -194,6 +193,7 @@ namespace Final_Project_x_Boss.Az.Models
                                 item.Owner.Notifications!.Add(not);
                                 Functions.SendMail(item.Owner.Email, not);
                                 item.Owner.AddCV(item);
+                                database.SaveWorkers();
                                 return;
                             }
 
@@ -225,14 +225,14 @@ namespace Final_Project_x_Boss.Az.Models
             {
                 foreach (var item in RequestedVacancies)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine(item.ShortInfo());
                 }
             }
             public void ShowRequestedCVs()
             {
                 foreach (var item in RequestedCV)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine(item.ShortInfo());
                 }
             }
 

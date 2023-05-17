@@ -1,30 +1,4 @@
 [
   {
-    "MyVacancies": [],
-    "Budget": 8123,
-    "Phone": "0554876502",
-    "City": "Baku",
-    "Id": "3faa7277-29d0-4a69-9018-dc74d9799875",
-    "Name": "Hesen",
-    "Surname": "Abdullazade",
-    "Notifications": [],
-    "Age": 21,
-    "Email": "hasanabdullazad@gmail.com",
-    "Password": "hasan2222",
-    "Username": "HasanHttps"
-  },
-  {
-    "MyVacancies": [],
-    "Budget": 7000,
-    "Phone": "0501233223",
-    "City": "Bkau",
-    "Id": "6250380b-d99b-4c6c-b127-1d8218fa27bf",
-    "Name": "Sia",
-    "Surname": "Cabbarova",
-    "Notifications": [],
-    "Age": 21,
-    "Email": "siajabbarova@gmail.com",
-    "Password": "siasiasia",
-    "Username": "jsiya"
   }
 ]

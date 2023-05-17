@@ -6,7 +6,6 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using Final_Project_x_Boss.Az.Models.EmployerNamespace;
 using Final_Project_x_Boss.Az.Models.Other;
 
 namespace Final_Project_x_Boss.Az.Models
@@ -18,6 +17,7 @@ namespace Final_Project_x_Boss.Az.Models
             private int _viewcount;
             private int _experiencetime;
             private double _offeredsalary;
+            Packages _package;
 
             public Employer Offerer { get; set; }
             public Categories Category { get; set; }
@@ -26,7 +26,6 @@ namespace Final_Project_x_Boss.Az.Models
             public DateTime EndTime { get; set; }
             public string Profession { get; set; }
 
-            public Packages Package { get; set; }
             public string Requirements { get; set; }
             public ushort MinimumAge { get; set; }
             public ushort MaximumAge { get; set; }
@@ -34,6 +33,14 @@ namespace Final_Project_x_Boss.Az.Models
 
 
 
+            public Packages Package { get=>_package;
+                set
+                {
+                    if(value==Packages.Basic) { EndTime = DateTime.Now.AddMonths(1); }
+                    else { EndTime = DateTime.Now.AddYears(1); }
+                    _package = value;
+                } 
+            }
             public int ViewCount
             {
                 get => _viewcount;
@@ -106,14 +113,13 @@ namespace Final_Project_x_Boss.Az.Models
             }
             public Vacancy() { Id = Guid.NewGuid(); }
 
-            public Vacancy(Employer offerer, Categories category, DateTime endTime,
-            string profession, double offeredSalary, string requirements,  ushort minimumAge,
+            public Vacancy(Employer offerer, Categories category
+            ,string profession, double offeredSalary, string requirements,  ushort minimumAge,
             ushort maximumAge, string degree, int experienceTime, Packages package) : this()
             {
                 Offerer = offerer;
                 Category = category;
                 StartTime = DateTime.Now;
-                EndTime = endTime;
                 ViewCount = 0;
                 Profession = profession;
                 OfferedSalary = offeredSalary;

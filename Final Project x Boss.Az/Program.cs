@@ -9,6 +9,7 @@ using System.Reflection;
 using Final_Project_x_Boss.Az.Models.Other;
 using System.Xml;
 using System.Transactions;
+using System.Data;
 
 namespace Final_Project_x_Boss.Az
 {
@@ -38,7 +39,7 @@ namespace Final_Project_x_Boss.Az
 
 
             // Employer
-                // ApplyToCV,CreateCV,CV filtration
+                // ApplyToCV
             // Worker
                 // ApplyToVacancy
 
@@ -91,6 +92,7 @@ namespace Final_Project_x_Boss.Az
                                     if (AdminChoice == 0)
                                     {
                                         database.CurrentAdmin!.ShowMyNotifications();
+                                        database.CurrentAdmin!.AddProcess(new($"{database.CurrentAdmin.Username} checked his/her notifications"));
                                         Console.ReadKey(true);
                                     }
                                     else if (AdminChoice == 1)
@@ -155,7 +157,7 @@ namespace Final_Project_x_Boss.Az
                                         if(deadlinechoice==0)
                                         {
                                             database.CurrentAdmin!.CheckCVDeadlines(ref database);
-                                            Console.WriteLine("All vacancies have been checked");
+                                            Console.WriteLine("All CVs have been checked");
                                             Console.ReadKey(true);
                                         }
                                         else
@@ -239,21 +241,24 @@ namespace Final_Project_x_Boss.Az
                                             if (WorkerChoice == 0)
                                             {
                                                 database.CurrentWorker!.ShowMyNotifications();
+                                                database.DefaultAdmin!.AddProcess(new($"{database.CurrentWorker.Username} checked his/her notifications"));
                                                 Console.ReadKey(true);
                                             }
                                             else if (WorkerChoice == 1)
                                             {
-
+                                                database.CurrentWorker!.CVCreation(ref database);
                                             }
                                             else if (WorkerChoice == 2)
                                             {
                                                 database.CurrentWorker!.ShowMyCVs(false);
+                                                database.DefaultAdmin!.AddProcess(new($"{database.CurrentWorker.Username} checked his/her cv's"));
                                                 string deleteId = FixId();
                                                 database.WorkerCvDeletion(deleteId);
                                             }
                                             else if (WorkerChoice == 3)
                                             {
-
+                                                VacancySearchAlgorithm(ref database);
+                                                string id = FixId();
                                             }
                                             else if (WorkerChoice == 4)
                                             {
@@ -313,6 +318,7 @@ namespace Final_Project_x_Boss.Az
                                             if (EmployerChoice == 0)
                                             {
                                                 database.CurrentEmployer!.ShowMyNotifications();
+                                                database.DefaultAdmin!.AddProcess(new($"{database.CurrentEmployer.Username} checked his/her notifications"));
                                                 Console.ReadKey(true);
                                             }
                                             else if (EmployerChoice == 1)
@@ -322,21 +328,24 @@ namespace Final_Project_x_Boss.Az
                                             else if (EmployerChoice == 2)
                                             {
                                                 database.CurrentEmployer!.ShowMyVacancies(false);
+                                                database.DefaultAdmin.AddProcess(new($"{database.CurrentWorker!.Username} checked his/her vacancies"));
                                                 string deleteId = FixId();
                                                 database.EmployerVacancyDeletion(deleteId);
                                             }
                                             else if (EmployerChoice == 3)
                                             {
-
+                                                
                                             }
                                             else if (EmployerChoice == 4)
                                             {
                                                 database.CurrentEmployer!.ShowMyVacancies();
+                                                database.DefaultAdmin.AddProcess(new($"{database.CurrentWorker!.Username} checked his/her vacancies"));
                                                 Console.ReadKey(true);
                                             }
                                             else if (EmployerChoice == 5)
                                             {
                                                 Console.WriteLine(database.CurrentEmployer);
+                                                database.DefaultAdmin.AddProcess(new($"{database.CurrentEmployer!.Username} checked his/her account"));
                                             }
                                             else break;
                                         }
@@ -367,14 +376,13 @@ namespace Final_Project_x_Boss.Az
                         if (JobSearchChoices == 0)
                         {
                             
-                            
+                            // CvSearchAlgorithm(ref database);
                             
                             Console.ReadKey(true);
                         }
                         else if (JobSearchChoices == 1)
                         {
-
-                            Console.ReadKey(true);
+                            VacancySearchAlgorithm(ref database);
                         }
                         else break;
                     }

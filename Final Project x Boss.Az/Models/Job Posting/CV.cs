@@ -15,22 +15,23 @@ namespace Final_Project_x_Boss.Az.Models
             private int _viewcount;
             private double _unigrade;
             private double _wantingsalary;
-            private DateTime _endTime;
             private string _gitlink;
             private string _linkedin;
+            private Packages _package;
 
-
-            public Worker Owner { get; set; }
+            public Worker Owner { get; init; }
             public Guid Id { get; init; }
             public Categories Category { get; init; }
             public DateTime StartTime { get; init; }
 
-            public Packages Package { get; set; }
+
+
+            public DateTime EndTime { get; set; }
             public string Profession { get; set; }
             public string School { get; set; }
             public List<string> Skills { get; set; }
             public List<string> Companies { get; set; }
-            public Dictionary<string, string> Languages { get; set; }
+            public List<string> Languages { get; set; }
             public bool HasDiplom { get; set; }
             public string LinkedIn { get=>_linkedin; set 
                 {
@@ -76,15 +77,27 @@ namespace Final_Project_x_Boss.Az.Models
                     _unigrade = value;
                 }
             }
-            public DateTime EndTime
+            
+
+
+
+
+            public Packages Package
             {
-                get => _endTime;
+                get => _package;
                 set
                 {
-                    if (value < DateTime.Now) throw new Exception("This CV is expired");
-                    _endTime = value;
+                    if (value == Packages.Basic) { EndTime = DateTime.Now.AddMonths(1); }
+                    else { EndTime = DateTime.Now.AddYears(1); }
+                    _package = value;
                 }
             }
+
+
+
+
+
+
 
 
 
@@ -93,8 +106,8 @@ namespace Final_Project_x_Boss.Az.Models
 
             public CV(Worker owner, Categories category, string school, double universityAcceptanceGrade,
                   List<string> skills, List<string> companies,
-                  DateTime endDate, Dictionary<string, string> languages,
-                  bool hasDiploma, int viewcount, string prof, string gitLink, string linkedIn, double wantingSalary,Packages package) : this()
+                  List<string> languages,
+                  bool hasDiploma, string prof, string gitLink, string linkedIn, double wantingSalary,Packages package) : this()
             {
                 Owner = owner;
                 Category = category;
@@ -103,13 +116,12 @@ namespace Final_Project_x_Boss.Az.Models
                 Skills = skills;
                 Companies = companies;
                 StartTime = DateTime.Now;
-                EndTime = endDate;
                 Languages = languages;
                 HasDiplom = hasDiploma;
                 GitLink = gitLink;
                 LinkedIn = linkedIn;
                 WantingSalary = wantingSalary;
-                ViewCount = viewcount;
+                ViewCount = 0;
                 Profession = prof;
                 Package = package;
             }
@@ -150,7 +162,7 @@ namespace Final_Project_x_Boss.Az.Models
                 MainText += "\n\t    Languages:\n\n";
                 foreach (var item in Languages)
                 {
-                    MainText += "\t\t\t" + item.Key + "-" + item.Value + "\n";
+                    MainText += "\t\t\t" + item+ "\n";
                 }
                 return MainText;
             }

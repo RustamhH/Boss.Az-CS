@@ -8,6 +8,6 @@ namespace Final_Project_x_Boss.Az.Models.Other
 {
     internal interface IApply
     {
-        public void Apply();
+        public void Apply(ref Database database);
     }
 }

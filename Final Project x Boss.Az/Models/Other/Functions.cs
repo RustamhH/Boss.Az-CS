@@ -215,7 +215,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 while (true)
                 {
 
-                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Experience Time", "By Premium"}, searchx, searchy);
+                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Experience Time", "By Premium" }, searchx, searchy);
                     if (filteringchoice == 0)
                     {
                         Categories category;
@@ -224,17 +224,17 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         database.ShowVacancies(category);
                         Console.ReadKey(true);
                     }
-                    else if(filteringchoice==1)
+                    else if (filteringchoice == 1)
                     {
                         double salary;
                         do
                         {
                             Console.Write("Enter Minimum Salary: ");
-                        } while (!double.TryParse(Console.ReadLine(),out salary));
+                        } while (!double.TryParse(Console.ReadLine(), out salary));
                         database.ShowVacancies(salary);
                         Console.ReadKey(true);
                     }
-                    else if(filteringchoice==2)
+                    else if (filteringchoice == 2)
                     {
                         int extime;
                         do
@@ -244,7 +244,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         database.ShowVacancies(extime);
                         Console.ReadKey(true);
                     }
-                    else if(filteringchoice==3)
+                    else if (filteringchoice == 3)
                     {
                         database.ShowPremiumVacancies();
                         Console.ReadKey(true);
@@ -257,20 +257,57 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 Console.ReadKey(true);
             }
         }
-
-
-
-
-
-
-
-        public static void CVCreation(ref Database database,Worker worker)
+        
+        
+        
+        
+        public static void CVSearchAlgorithm(ref Database database)
         {
-            Categories category;
-            string profession, school, gitlink, linkedin;
-            int skillcount, companycount, languagecount;
-            bool diplom;
+            int searchx = 100, searchy = 2;
+            int filterornot = Print(new List<string> { "Use filter", "Don't use filter" }, searchx, searchy);
+            if (filterornot == 0)
+            {
+                while (true)
+                {
+
+                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Premium" }, searchx, searchy);
+                    if (filteringchoice == 0)
+                    {
+                        Categories category;
+                        int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), searchx, searchy);
+                        Enum.TryParse(CategoryChoice.ToString(), out category);
+                        database.ShowCVs(category);
+                        Console.ReadKey(true);
+                    }
+                    else if (filteringchoice == 1)
+                    {
+                        double salary;
+                        do
+                        {
+                            Console.Write("Enter Minimum Salary: ");
+                        } while (!double.TryParse(Console.ReadLine(), out salary));
+                        database.ShowCVs(salary);
+                        Console.ReadKey(true);
+                    }
+                    else if (filteringchoice == 2)
+                    {
+                        database.ShowPremiumCVs();
+                        Console.ReadKey(true);
+                    }
+                }
+            }
+            else
+            {
+                database.ShowCVs();
+                Console.ReadKey(true);
+            }
         }
+
+
+
+
+
+
 
         
 
