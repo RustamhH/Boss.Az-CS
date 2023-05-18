@@ -1,5 +1,23 @@
 [
   {
-
+    "MyCVs": [],
+    "Budget": 4990,
+    "Phone": "0502626502",
+    "City": "Baku",
+    "Id": "70fd6aed-ebcc-4883-88bf-d0d732143ce6",
+    "Name": "Hesen",
+    "Surname": "Abdullazade",
+    "Notifications": [
+      {
+        "Id": "6f3af646-6ac7-47f8-ac68-dc8e978c7a6f",
+        "Title": "Good Vacancy",
+        "Content": "Your Vacancy with [5dda80f3-2c27-4492-934a-4269e5ab41fe] id accepted by Boss.Az admins",
+        "SendingTime": "2023-05-18T18:40:32.2631048+04:00"
+      }
+    ],
+    "Age": 25,
+    "Email": "rustamh2006@gmail.com",
+    "Password": "2000rustam",
+    "Username": "hasan"
   }
 ]

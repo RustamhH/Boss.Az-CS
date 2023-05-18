@@ -14,6 +14,9 @@ using static Final_Project_x_Boss.Az.Models.Other.Functions;
 using System.Data;
 using System.Reflection.PortableExecutable;
 using System.Numerics;
+using Final_Project_x_Boss.Az.Models.CVNamespace;
+using Final_Project_x_Boss.Az.Models.VacancyNamespace;
+using System.Runtime.InteropServices;
 
 namespace Final_Project_x_Boss.Az.Models.Other
 {
@@ -137,6 +140,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                     CurrentWorker = item;
                     DefaultAdmin!.AddProcess(new Process($"{CurrentWorker.Username} logged into his/her account"));
                     DefaultAdmin!.Notifications!.Add(new("New Login", $"{CurrentWorker.Username} logged into his/her account", CurrentWorker));
+                    SendMail(CurrentWorker.Email, new("Logged in", "You have logged in to your Boss.Az account successfully", DefaultAdmin));
                     return true;
                 }
             }
@@ -147,6 +151,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                     CurrentEmployer = item;
                     DefaultAdmin!.Processes.Add(new Process($"{CurrentEmployer.Username} logged into his/her account"));
                     DefaultAdmin!.Notifications!.Add(new("New Login", $"{CurrentEmployer.Username} logged into his/her account", CurrentEmployer));
+                    SendMail(CurrentEmployer.Email, new("Logged in", "You have logged in to your Boss.Az account successfully", DefaultAdmin));
                     return true;
                 }
             }
@@ -178,14 +183,15 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
         // no filter
-        public void ShowCVs()
+        public void ShowCVs(bool isLong = true)
         {
             foreach (var worker in Workers)
             {
                 worker.MyCVs.Sort((c1, c2) => c1.ViewCount.CompareTo(c2.ViewCount));
                 foreach (var cv in worker.MyCVs)
                 {
-                    Console.WriteLine(cv);
+                    if(isLong) Console.WriteLine(cv);
+                    else Console.WriteLine(cv.ShortInfo());
                     Console.WriteLine();
                 }
             }
@@ -193,7 +199,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
         // category filter
-        public void ShowCVs(Categories category)
+        public void ShowCVs(Categories category, bool isLong = true)
         {
             List<Worker> showList = Workers.Where(worker => worker.MyCVs.Any(cv => cv.Category == category)).ToList(); // with filter
             foreach (var worker in showList)
@@ -201,7 +207,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 worker.MyCVs.Sort((c1, c2) => c1.ViewCount.CompareTo(c2.ViewCount));
                 foreach (var cv in worker.MyCVs)
                 {
-                    Console.WriteLine(cv);
+                    if (isLong) Console.WriteLine(cv);
+                    else Console.WriteLine(cv.ShortInfo());
                     Console.WriteLine();
                 }
             }
@@ -209,7 +216,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
         // salary filter
-        public void ShowCVs(double minimumsalary) 
+        public void ShowCVs(double minimumsalary, bool isLong = true) 
         {
             List<Worker> showList = Workers.Where(worker => worker.MyCVs.Any(cv => cv.WantingSalary >= minimumsalary)).ToList(); // with filter
             foreach (var worker in showList)
@@ -217,7 +224,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 worker.MyCVs.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var cv in worker.MyCVs)
                 {
-                    Console.WriteLine(cv);
+                    if (isLong) Console.WriteLine(cv);
+                    else Console.WriteLine(cv.ShortInfo());
                     Console.WriteLine();
                 }
             }
@@ -234,7 +242,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
         // premium cv
-        public void ShowPremiumCVs()
+        public void ShowPremiumCVs(bool isLong = true)
         {
             List<Worker> showList = Workers.Where(worker => worker.MyCVs.Any(cv => cv.Package == Packages.Premium)).ToList(); // with filter
             foreach (var worker in showList)
@@ -242,7 +250,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 worker.MyCVs.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var cv in worker.MyCVs)
                 {
-                    Console.WriteLine(cv);
+                    if (isLong) Console.WriteLine(cv);
+                    else Console.WriteLine(cv.ShortInfo());
                     Console.WriteLine();
                 }
             }
@@ -253,21 +262,22 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
         // Show with no Filter
-        public void ShowVacancies()
+        public void ShowVacancies(bool isLong=true)
         {
             foreach (var employer in Employers)
             {
                 employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vacancy in employer.MyVacancies)
                 {
-                    Console.WriteLine(vacancy);
+                    if (isLong) Console.WriteLine(vacancy);
+                    else Console.WriteLine(vacancy.ShortInfo());
                     Console.WriteLine();
                 }
             }
         }
 
         // Show specific Category
-        public void ShowVacancies(Categories category)
+        public void ShowVacancies(Categories category,bool isLong=true)
         {
             List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.Category == category)).ToList(); // with filter
             foreach (var employer in showList)
@@ -275,14 +285,15 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
-                    Console.WriteLine(vac);
+                    if (isLong) Console.WriteLine(vac);
+                    else Console.WriteLine(vac.ShortInfo());
                     Console.WriteLine();
                 }
             }
         }
 
         // Show above specific Salary
-        public void ShowVacancies(double minimumSalary)
+        public void ShowVacancies(double minimumSalary,bool isLong=true)
         {
             List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.OfferedSalary >= minimumSalary)).ToList(); // with filter
             foreach (var employer in showList)
@@ -290,7 +301,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
-                    Console.WriteLine(vac);
+                    if (isLong) Console.WriteLine(vac);
+                    else Console.WriteLine(vac.ShortInfo());
                     Console.WriteLine();
                 }
             }
@@ -298,7 +310,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
         // Show above specific Experience time
-        public void ShowVacancies(int minimumexperiencetime)
+        public void ShowVacancies(int minimumexperiencetime, bool isLong = true)
         {
             List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.ExperienceTime >= minimumexperiencetime)).ToList(); // with filter
             foreach (var employer in showList)
@@ -306,7 +318,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
-                    Console.WriteLine(vac);
+                    if (isLong) Console.WriteLine(vac);
+                    else Console.WriteLine(vac.ShortInfo());
                     Console.WriteLine();
                 }
             }
@@ -314,7 +327,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
         // Show only Premium Vacancies
-        public void ShowPremiumVacancies()
+        public void ShowPremiumVacancies(bool isLong = true)
         {
             List<Employer> showList = Employers.Where(employer => employer.MyVacancies.Any(vac => vac.Package == Packages.Premium)).ToList(); // with filter
             foreach (var employer in showList)
@@ -322,7 +335,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
-                    Console.WriteLine(vac);
+                    if (isLong) Console.WriteLine(vac);
+                    else Console.WriteLine(vac.ShortInfo());
                     Console.WriteLine();
                 }
             }
@@ -361,6 +375,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             DefaultAdmin!.Notifications!.Add(new("CV deletion", $"{CurrentWorker.Username} deleted his/her CV with [{id}] id", CurrentWorker));
             SendMail(CurrentWorker.Email, new("CV deleted", $"Your CV with {id} has been deleted successfully", DefaultAdmin));
             DefaultAdmin.AddProcess(new($"{CurrentWorker.Username} has deleted his/her CV with [{id}]"));
+            SaveWorkers();
         }
         
         public void EmployerVacancyDeletion(string id)
@@ -378,11 +393,26 @@ namespace Final_Project_x_Boss.Az.Models.Other
             DefaultAdmin!.Notifications!.Add(new("Vacancy deletion", $"{CurrentEmployer.Username} deleted his/her vacancy with [{id}] id", CurrentEmployer));
             SendMail(CurrentEmployer.Email, new("Vacancy deleted", $"Your vacancy with {id} has been deleted successfully", DefaultAdmin));
             DefaultAdmin.AddProcess(new($"{CurrentEmployer.Username} has deleted his/her vacancy with [{id}]"));
+            SaveWorkers();
         }
 
 
 
-        
+        public Worker FindWorker(string worker)
+        {
+            foreach (var item in Workers)
+            {
+                if (item.Id.ToString()==worker) return item;
+            }
+            return null;
+        }public Employer FindEmployer(string employer)
+        {
+            foreach (var item in Employers)
+            {
+                if (item.Id.ToString()==employer) return item;
+            }
+            return null;
+        }
 
 
 

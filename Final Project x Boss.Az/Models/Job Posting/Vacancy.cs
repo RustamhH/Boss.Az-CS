@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using Final_Project_x_Boss.Az.Models.Other;
+using System.Text.Json.Serialization;
 
 namespace Final_Project_x_Boss.Az.Models
 {
@@ -19,6 +20,7 @@ namespace Final_Project_x_Boss.Az.Models
             private double _offeredsalary;
             Packages _package;
 
+            [JsonIgnore]
             public Employer Offerer { get; set; }
             public Categories Category { get; set; }
             public Guid Id { get; set; }

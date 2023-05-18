@@ -127,7 +127,7 @@ namespace Final_Project_x_Boss.Az.Models
                 // admine notification gedib yoxlanilmali,eger admin qebul etse liste elave olunur,
                 // employere mail ve notification gedir , processlere elave olunur.
                 database.DefaultAdmin!.Notifications!.Add(new("New Vacancy Creation", $"{Username} created a new vacancy.Check your requests to verify this vacancy", this));
-                database.DefaultAdmin!.RequestedVacancies.Add(vacancy);
+                database.DefaultAdmin!.AddRequestedVacancies(vacancy);
             }
 
 

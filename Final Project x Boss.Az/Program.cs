@@ -10,6 +10,7 @@ using Final_Project_x_Boss.Az.Models.Other;
 using System.Xml;
 using System.Transactions;
 using System.Data;
+using Final_Project_x_Boss.Az.Models.CVNamespace;
 
 namespace Final_Project_x_Boss.Az
 {
@@ -24,6 +25,8 @@ namespace Final_Project_x_Boss.Az
         static void Main(string[] args)
         {
            
+            
+            
 
             Database database = new();
             int mainx = 49, mainy = 13;
@@ -36,15 +39,7 @@ namespace Final_Project_x_Boss.Az
 
             //database.AddEmployer(employer);
             //database.AddWorker(worker);
-
-
-            // Employer
-                // ApplyToCV
-            // Worker
-                // ApplyToVacancy
-
-
-
+            
 
 
 
@@ -257,8 +252,7 @@ namespace Final_Project_x_Boss.Az
                                             }
                                             else if (WorkerChoice == 3)
                                             {
-                                                VacancySearchAlgorithm(ref database);
-                                                string id = FixId();
+                                                database.CurrentWorker!.Apply(ref database);
                                             }
                                             else if (WorkerChoice == 4)
                                             {
@@ -270,6 +264,8 @@ namespace Final_Project_x_Boss.Az
                                             {
                                                 Console.WriteLine(database.CurrentWorker);
                                                 database.DefaultAdmin.AddProcess(new($"{database.CurrentWorker!.Username} checked his/her account"));
+                                                Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else break;
                                         }
@@ -334,7 +330,7 @@ namespace Final_Project_x_Boss.Az
                                             }
                                             else if (EmployerChoice == 3)
                                             {
-                                                
+                                                database.CurrentEmployer!.Apply(ref database);
                                             }
                                             else if (EmployerChoice == 4)
                                             {
@@ -345,7 +341,10 @@ namespace Final_Project_x_Boss.Az
                                             else if (EmployerChoice == 5)
                                             {
                                                 Console.WriteLine(database.CurrentEmployer);
+                                                Console.ReadKey(true);
+                                                Console.Clear();
                                                 database.DefaultAdmin.AddProcess(new($"{database.CurrentEmployer!.Username} checked his/her account"));
+
                                             }
                                             else break;
                                         }

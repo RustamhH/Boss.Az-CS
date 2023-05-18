@@ -184,7 +184,9 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 // processlere,adminin notif,usere mail
                 if (database.RegisterUser(user))
                 {
-                    SendMail(email, new("Welcome", "Your have registered to your Boss.Az account successfully", database.DefaultAdmin));
+                    Notification notification = new("Welcome", "Your have registered to your Boss.Az account successfully", database.DefaultAdmin);
+                    SendMail(email, notification);
+                    user.Notifications!.Add(notification);
                     database.DefaultAdmin!.Notifications!.Add(new("New Register", $"{username} has registered to Boss.Az", user));
                     database.DefaultAdmin.AddProcess(new($"{username} has registered to Boss.Az"));
                 }
@@ -206,7 +208,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
 
 
-        public static void VacancySearchAlgorithm(ref Database database)
+        public static void VacancySearchAlgorithm(ref Database database,bool isLong=true)
         {
             int searchx = 100, searchy = 2;
             int filterornot = Print(new List<string> { "Use filter", "Don't use filter" }, searchx, searchy);
@@ -221,7 +223,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         Categories category;
                         int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), searchx, searchy);
                         Enum.TryParse(CategoryChoice.ToString(), out category);
-                        database.ShowVacancies(category);
+                        database.ShowVacancies(category,isLong);
                         Console.ReadKey(true);
                     }
                     else if (filteringchoice == 1)
@@ -231,7 +233,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         {
                             Console.Write("Enter Minimum Salary: ");
                         } while (!double.TryParse(Console.ReadLine(), out salary));
-                        database.ShowVacancies(salary);
+                        database.ShowVacancies(salary,isLong);
                         Console.ReadKey(true);
                     }
                     else if (filteringchoice == 2)
@@ -241,19 +243,19 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         {
                             Console.Write("Enter Minimum Experience Time: ");
                         } while (!int.TryParse(Console.ReadLine(), out extime));
-                        database.ShowVacancies(extime);
+                        database.ShowVacancies(extime, isLong);
                         Console.ReadKey(true);
                     }
                     else if (filteringchoice == 3)
                     {
-                        database.ShowPremiumVacancies();
+                        database.ShowPremiumVacancies(isLong);
                         Console.ReadKey(true);
                     }
                 }
             }
             else
             {
-                database.ShowVacancies();
+                database.ShowVacancies(isLong);
                 Console.ReadKey(true);
             }
         }
@@ -261,7 +263,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
         
         
         
-        public static void CVSearchAlgorithm(ref Database database)
+        public static void CVSearchAlgorithm(ref Database database,bool isLong=true)
         {
             int searchx = 100, searchy = 2;
             int filterornot = Print(new List<string> { "Use filter", "Don't use filter" }, searchx, searchy);
@@ -276,7 +278,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         Categories category;
                         int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), searchx, searchy);
                         Enum.TryParse(CategoryChoice.ToString(), out category);
-                        database.ShowCVs(category);
+                        database.ShowCVs(category, isLong);
                         Console.ReadKey(true);
                     }
                     else if (filteringchoice == 1)
@@ -286,19 +288,19 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         {
                             Console.Write("Enter Minimum Salary: ");
                         } while (!double.TryParse(Console.ReadLine(), out salary));
-                        database.ShowCVs(salary);
+                        database.ShowCVs(salary, isLong);
                         Console.ReadKey(true);
                     }
                     else if (filteringchoice == 2)
                     {
-                        database.ShowPremiumCVs();
+                        database.ShowPremiumCVs(isLong);
                         Console.ReadKey(true);
                     }
                 }
             }
             else
             {
-                database.ShowCVs();
+                database.ShowCVs(isLong);
                 Console.ReadKey(true);
             }
         }

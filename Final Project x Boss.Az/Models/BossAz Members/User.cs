@@ -52,7 +52,7 @@ namespace Final_Project_x_Boss.Az.Models
             public override string ToString()
             {
                 string Text = base.ToString();
-                Text += $"\tCity: {City}\n\t\tPhone: {Phone}\n\t\tBudget: {Budget}\n";
+                Text += $"City: {City}\nPhone: {Phone}\nBudget: {Budget}\n";
                 return Text;
             }
 

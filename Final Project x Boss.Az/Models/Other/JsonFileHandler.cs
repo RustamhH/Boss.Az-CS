@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Final_Project_x_Boss.Az.Models.Other
@@ -14,13 +16,14 @@ namespace Final_Project_x_Boss.Az.Models.Other
         {
             try
             {
-                string text = File.ReadAllText(filePath);
-                return JsonSerializer.Deserialize<T>(text);
+                JsonSerializerOptions op = new JsonSerializerOptions();
+                using FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate);
+                return JsonSerializer.Deserialize<T>(fs,op);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return default;
+                return default(T);
             }
         }
         public static void Write<T>(string filePath, T values)

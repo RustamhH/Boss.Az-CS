@@ -29,13 +29,32 @@ namespace Final_Project_x_Boss.Az.Models
                     {
                         if (vacancy.Id.ToString() == applyid)
                         {
-                           
+                            Console.Write("Which of your CV you want to apply ? Enter ID: ");
+                            ShowMyCVs(false);
+                            string id = FixId();
+                            CV cv = CVSearchById(id);
+                            if(cv!=null)
+                            {
+                                // processlere elave olunsun , workerin notificationu ve maili
+                                database.DefaultAdmin.AddProcess(new($"{Username} applyed {employer.Username} s vacancy with [{applyid}] id"));
+                                Notification notification = new("New Request", $"{cv}", this);
+                                employer.Notifications!.Add(notification);
+                                SendMail(employer.Email, notification);
+                            }
+
                         }
                     }
                 }
             }
 
-
+            public CV CVSearchById(string id)
+            {
+                foreach (var item in MyCVs)
+                {
+                    if (item.Id.ToString() == id) return item; 
+                }
+                return null;
+            }
 
             public void AddCV(CV cv)
             {
@@ -76,13 +95,7 @@ namespace Final_Project_x_Boss.Az.Models
             }
 
 
-            public override string ToString()
-            {
-                string Text = base.ToString();
-                Text += $"\t\tCV count: {MyCVs.Count}\n";
-                return Text;
-            }
-
+            
 
             public void CVCreation(ref Database database)
             {
@@ -134,20 +147,20 @@ namespace Final_Project_x_Boss.Az.Models
                 {
                     Console.WriteLine("Skills (separated by commas): ");
                     skillinput = Console.ReadLine();
-                } while (skillinput != null || skillinput != "");
+                } while (skillinput == null || skillinput == "");
                 skills = skillinput.Split(',').Select(skill => skill.Trim()).ToList();
                 do
                 {
                     Console.WriteLine("Companies (separated by commas): ");
                     companyinput = Console.ReadLine();
-                } while (companyinput != null || companyinput != ""); 
+                } while (companyinput == null || companyinput == ""); 
                 companies = companyinput.Split(',').Select(company => company.Trim()).ToList();
 
                 do
                 {
                     Console.WriteLine("Languages (separated by commas): ");
                     languagesinput = Console.ReadLine();
-                } while (languagesinput != null || languagesinput != "");
+                } while (languagesinput == null || languagesinput == "");
                 languages = languagesinput.Split(',').Select(language => language.Trim()).ToList();
 
                 do
@@ -182,7 +195,7 @@ namespace Final_Project_x_Boss.Az.Models
                 CV cv;
                 try
                 {
-                    cv = new(this, category, school, unigrade, skills, companies, languages, hasdiplom, profession, gitlink, linkedin, wantingsalary, package);
+                    cv = new(this,category, school, unigrade, skills, companies, languages, hasdiplom, profession, gitlink, linkedin, wantingsalary, package);
                 }
                 catch(Exception ex)
                 {
@@ -191,17 +204,17 @@ namespace Final_Project_x_Boss.Az.Models
                     return;
                 }
                 database.DefaultAdmin!.Notifications!.Add(new("New CV Creation", $"{Username} created a new CV.Check your requests to verify this CV", this));
-                database.DefaultAdmin!.RequestedCV.Add(cv);
-
-
-
-
-
-
+                database.DefaultAdmin!.AddRequestedCV(cv);
             }
 
 
 
+            public override string ToString()
+            {
+                string Text = base.ToString();
+                Text += $"CV count: {MyCVs.Count}\n";
+                return Text;
+            }
 
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Final_Project_x_Boss.Az.Models.PersonNamespace;
 
@@ -14,6 +15,8 @@ namespace Final_Project_x_Boss.Az.Models
             public Guid Id { get; init; }
             public string? Title { get; init; }
             public string? Content { get; init; }
+
+            [JsonIgnore]
             public Person? FromWho { get; init; }
             public DateTime SendingTime { get; init; }
 

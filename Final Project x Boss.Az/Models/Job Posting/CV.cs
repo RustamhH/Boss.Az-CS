@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Final_Project_x_Boss.Az.Models.Other;
 using Final_Project_x_Boss.Az.Models.WorkerNamespace;
@@ -12,6 +13,7 @@ namespace Final_Project_x_Boss.Az.Models
     {
         internal sealed class CV
         {
+
             private int _viewcount;
             private double _unigrade;
             private double _wantingsalary;
@@ -19,7 +21,9 @@ namespace Final_Project_x_Boss.Az.Models
             private string _linkedin;
             private Packages _package;
 
-            public Worker Owner { get; init; }
+            [JsonIgnore]
+            public Worker Owner { get; set; }
+            public Guid OwnerId { get; init; }
             public Guid Id { get; init; }
             public Categories Category { get; init; }
             public DateTime StartTime { get; init; }
@@ -102,7 +106,13 @@ namespace Final_Project_x_Boss.Az.Models
 
 
 
-            public CV() { Id = Guid.NewGuid(); }
+            public CV() 
+            { 
+                Id = Guid.NewGuid();
+                Skills = new();
+                Companies = new();
+                Languages = new();
+            }
 
             public CV(Worker owner, Categories category, string school, double universityAcceptanceGrade,
                   List<string> skills, List<string> companies,
@@ -136,10 +146,8 @@ namespace Final_Project_x_Boss.Az.Models
                 $@"
         Category: {Category}                                View Count: {ViewCount} | CV Id:{Id} | {Package} package CV                      
             {Profession}
-            {Owner.Name + " " + Owner.Surname} : {WantingSalary} AZN
+            {WantingSalary} AZN
             
-            City: {Owner.City}                     Phone : {Owner.Phone}
-            Age:  {Owner.Age}                       E-Mail: {Owner.Email}
             Start Time: {StartTime.Date.ToShortDateString()}         Linkedin: {LinkedIn}
             End Time: {EndTime.Date.ToShortDateString()}           GitHub: {GitLink}
            
@@ -175,7 +183,6 @@ namespace Final_Project_x_Boss.Az.Models
             {Id}
             {Profession}
             {WantingSalary} AZN
-            {Owner.Name + " " + Owner.Surname}
             ";
             }
 

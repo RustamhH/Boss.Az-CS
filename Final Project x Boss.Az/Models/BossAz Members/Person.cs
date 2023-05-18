@@ -85,14 +85,14 @@ namespace Final_Project_x_Boss.Az.Models
             {
                 return
                 $@"
-                Id:{Id}
-                Name:{Name}
-                Surname {Surname}
-                Age:{Age}
-                Username:{Username}
-                Email:{Email}
-                Password:{Password}
-            ";
+Id:{Id}
+Name:{Name}
+Surname {Surname}
+Age:{Age}
+Username:{Username}
+Email:{Email}
+Password:{Password}
+";
             }
 
 
@@ -112,7 +112,7 @@ namespace Final_Project_x_Boss.Az.Models
                         Console.WriteLine(item);
                     }
                 }
-                
+                Console.Clear();    
             }
 
 
