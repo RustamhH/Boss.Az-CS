@@ -109,10 +109,9 @@ Password:{Password}
                 {
                     foreach (var item in Notifications!)
                     {
-                        Console.WriteLine(item);
+                        Console.WriteLine(item.LongData());
                     }
                 }
-                Console.Clear();    
             }
 
 

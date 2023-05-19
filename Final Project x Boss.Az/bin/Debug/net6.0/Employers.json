@@ -1,4 +1,62 @@
 [
   {
+    "MyVacancies": [
+      {
+        "Category": 7,
+        "Id": "9aca95ac-8838-4071-ac47-250c1612d7b2",
+        "StartTime": "2023-05-19T21:48:01.9116241+04:00",
+        "EndTime": "2023-06-19T23:29:15.0967164+04:00",
+        "Profession": "Lawyer",
+        "Requirements": "Nothing",
+        "MinimumAge": 25,
+        "MaximumAge": 34,
+        "Degree": "Ali",
+        "Package": 0,
+        "ViewCount": 0,
+        "ExperienceTime": 1,
+        "OfferedSalary": 2500
+      },
+      {
+        "Category": 4,
+        "Id": "878390a3-58fc-4292-8dfd-92f889958386",
+        "StartTime": "2023-05-19T23:29:59.5218463+04:00",
+        "EndTime": "2023-06-19T23:29:59.5218484+04:00",
+        "Profession": "Salesman",
+        "Requirements": "NOOOO",
+        "MinimumAge": 31,
+        "MaximumAge": 32,
+        "Degree": "ali",
+        "Package": 0,
+        "ViewCount": 0,
+        "ExperienceTime": 4,
+        "OfferedSalary": 31
+      }
+    ],
+    "Budget": 5980,
+    "Phone": "0513940859",
+    "City": "Baku",
+    "Id": "24eb7efe-9aa3-4654-a0ec-998a83301d97",
+    "Name": "RUstem",
+    "Surname": "Hesenli",
+    "Notifications": [
+      {
+        "Id": "63f36693-d0b8-4f54-a184-3410d35876f3",
+        "Title": "Good Vacancy",
+        "Content": "Your Vacancy with [9aca95ac-8838-4071-ac47-250c1612d7b2] id accepted by Boss.Az admins",
+        "FromWho": "admin",
+        "SendingTime": "2023-05-19T21:48:42.7437649+04:00"
+      },
+      {
+        "Id": "46dedbdc-df49-40d5-8066-a6830bc70539",
+        "Title": "Good Vacancy",
+        "Content": "Your Vacancy with [878390a3-58fc-4292-8dfd-92f889958386] id accepted by Boss.Az admins",
+        "FromWho": "admin",
+        "SendingTime": "2023-05-19T23:30:30.5464263+04:00"
+      }
+    ],
+    "Age": 26,
+    "Email": "rustamh2006@gmail.com",
+    "Password": "rustamchik",
+    "Username": "RustamH"
   }
 ]

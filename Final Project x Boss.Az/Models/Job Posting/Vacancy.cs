@@ -19,9 +19,6 @@ namespace Final_Project_x_Boss.Az.Models
             private int _experiencetime;
             private double _offeredsalary;
             Packages _package;
-
-            [JsonIgnore]
-            public Employer Offerer { get; set; }
             public Categories Category { get; set; }
             public Guid Id { get; set; }
             public DateTime StartTime { get; set; }
@@ -81,20 +78,14 @@ namespace Final_Project_x_Boss.Az.Models
             public override string ToString()
             {
                 string MainText =
-                    $@"
-                Category:{Category}                     View Count:{ViewCount} | Vacancy Id:{Id} | {Package} package vacancy
-                    Profession:{Profession}             Phone:{Offerer.Phone}
-                    Offered Salary:{OfferedSalary}                 E-Mail:{Offerer.Email}
-                    Offerer:{Offerer.Name + " " + Offerer.Surname}
-                    City:{Offerer.City}
-                    Degree:{Degree}
-                    Experience:{ExperienceTime} year
-                    Start Time:{StartTime.Date.ToShortDateString()}
-                    End Time:{EndTime.Date.ToShortDateString()}
-                    
-                            Requirements
-                    {Requirements}
-                    ";
+                    $"Category:{Category}                     View Count:{ViewCount} | Vacancy Id:{Id}\n" +
+                    $"Profession:{Profession}                                        | {Package} package vacancy\n" +
+                    $"Offered Salary:{OfferedSalary} \n" +
+                    $"Degree:{Degree}\n" +
+                    $"Experience:{ExperienceTime} year\n" +
+                    $"Start Time:{StartTime.Date.ToShortDateString()}\n" +
+                    $"End Time:{EndTime.Date.ToShortDateString()}\n" +
+                    $"Requirements: {Requirements}\n";
                 
                 return MainText;
             }
@@ -110,16 +101,14 @@ namespace Final_Project_x_Boss.Az.Models
             {Id}
             {Profession}
             {OfferedSalary} AZN
-            {Offerer.Name + " " + Offerer.Surname}
             ";
             }
             public Vacancy() { Id = Guid.NewGuid(); }
 
-            public Vacancy(Employer offerer, Categories category
+            public Vacancy(Categories category
             ,string profession, double offeredSalary, string requirements,  ushort minimumAge,
             ushort maximumAge, string degree, int experienceTime, Packages package) : this()
             {
-                Offerer = offerer;
                 Category = category;
                 StartTime = DateTime.Now;
                 ViewCount = 0;

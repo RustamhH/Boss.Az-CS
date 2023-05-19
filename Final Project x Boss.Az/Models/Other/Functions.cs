@@ -156,7 +156,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             password = pair.Value;
             Random random = new();
             int randint = random.Next(100000, 1000000);
-            SendMail(email, new("Your Verification Code", randint.ToString(), database.DefaultAdmin));
+            SendMail(email, new("Your Verification Code", randint.ToString(), database.DefaultAdmin.Username));
             do
             {
                 Console.Write("Enter registration code:");
@@ -184,10 +184,10 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 // processlere,adminin notif,usere mail
                 if (database.RegisterUser(user))
                 {
-                    Notification notification = new("Welcome", "Your have registered to your Boss.Az account successfully", database.DefaultAdmin);
+                    Notification notification = new("Welcome", "Your have registered to your Boss.Az account successfully", database.DefaultAdmin.Username);
                     SendMail(email, notification);
                     user.Notifications!.Add(notification);
-                    database.DefaultAdmin!.Notifications!.Add(new("New Register", $"{username} has registered to Boss.Az", user));
+                    database.DefaultAdmin!.Notifications!.Add(new("New Register", $"{username} has registered to Boss.Az", user.Username));
                     database.DefaultAdmin.AddProcess(new($"{username} has registered to Boss.Az"));
                 }
                 else
@@ -212,19 +212,19 @@ namespace Final_Project_x_Boss.Az.Models.Other
         {
             int searchx = 100, searchy = 2;
             int filterornot = Print(new List<string> { "Use filter", "Don't use filter" }, searchx, searchy);
+            Console.ForegroundColor = ConsoleColor.White;
             if (filterornot == 0)
             {
                 while (true)
                 {
 
-                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Experience Time", "By Premium" }, searchx, searchy);
+                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Experience Time", "By Premium","Exit" }, searchx, searchy);
                     if (filteringchoice == 0)
                     {
                         Categories category;
                         int CategoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), searchx, searchy);
                         Enum.TryParse(CategoryChoice.ToString(), out category);
-                        database.ShowVacancies(category,isLong);
-                        Console.ReadKey(true);
+                        database.ShowVacancies(category, isLong);
                     }
                     else if (filteringchoice == 1)
                     {
@@ -233,8 +233,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         {
                             Console.Write("Enter Minimum Salary: ");
                         } while (!double.TryParse(Console.ReadLine(), out salary));
-                        database.ShowVacancies(salary,isLong);
-                        Console.ReadKey(true);
+                        database.ShowVacancies(salary, isLong);
                     }
                     else if (filteringchoice == 2)
                     {
@@ -244,19 +243,17 @@ namespace Final_Project_x_Boss.Az.Models.Other
                             Console.Write("Enter Minimum Experience Time: ");
                         } while (!int.TryParse(Console.ReadLine(), out extime));
                         database.ShowVacancies(extime, isLong);
-                        Console.ReadKey(true);
                     }
                     else if (filteringchoice == 3)
                     {
                         database.ShowPremiumVacancies(isLong);
-                        Console.ReadKey(true);
                     }
+                    else break;
                 }
             }
             else
             {
                 database.ShowVacancies(isLong);
-                Console.ReadKey(true);
             }
         }
         
@@ -267,12 +264,13 @@ namespace Final_Project_x_Boss.Az.Models.Other
         {
             int searchx = 100, searchy = 2;
             int filterornot = Print(new List<string> { "Use filter", "Don't use filter" }, searchx, searchy);
+            Console.ForegroundColor = ConsoleColor.White;
             if (filterornot == 0)
             {
                 while (true)
                 {
 
-                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Premium" }, searchx, searchy);
+                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Premium","Exit" }, searchx, searchy);
                     if (filteringchoice == 0)
                     {
                         Categories category;
@@ -296,12 +294,12 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         database.ShowPremiumCVs(isLong);
                         Console.ReadKey(true);
                     }
+                    else break;
                 }
             }
             else
             {
                 database.ShowCVs(isLong);
-                Console.ReadKey(true);
             }
         }
 

@@ -1,23 +1,55 @@
 [
   {
-    "MyCVs": [],
-    "Budget": 4990,
-    "Phone": "0502626502",
+    "MyCVs": [
+      {
+        "Id": "0e37374f-b2e2-4c37-bad9-8127390dc470",
+        "Category": 7,
+        "StartTime": "2023-05-19T21:25:55.6896492+04:00",
+        "EndTime": "2023-06-19T21:38:21.6314244+04:00",
+        "Profession": "eeeer",
+        "School": "ecfrf",
+        "Skills": [
+          "e",
+          "r",
+          "t"
+        ],
+        "Companies": [
+          "q",
+          "w",
+          "e"
+        ],
+        "Languages": [
+          "t",
+          "u",
+          "u"
+        ],
+        "HasDiplom": true,
+        "LinkedIn": "fycgyf.linkedin.com",
+        "GitLink": "fydef.github.com",
+        "WantingSalary": 342,
+        "ViewCount": 0,
+        "UniversityAcceptanceGrade": 271,
+        "Package": 0
+      }
+    ],
+    "Budget": 4980,
+    "Phone": "0503356502",
     "City": "Baku",
-    "Id": "70fd6aed-ebcc-4883-88bf-d0d732143ce6",
+    "Id": "31d70488-7870-45a5-938e-a38633d89527",
     "Name": "Hesen",
     "Surname": "Abdullazade",
     "Notifications": [
       {
-        "Id": "6f3af646-6ac7-47f8-ac68-dc8e978c7a6f",
+        "Id": "e9601bbd-2b13-4fec-9e65-80d50b339b4c",
         "Title": "Good Vacancy",
-        "Content": "Your Vacancy with [5dda80f3-2c27-4492-934a-4269e5ab41fe] id accepted by Boss.Az admins",
-        "SendingTime": "2023-05-18T18:40:32.2631048+04:00"
+        "Content": "Your Vacancy with [0e37374f-b2e2-4c37-bad9-8127390dc470] id accepted by Boss.Az admins",
+        "FromWho": "admin",
+        "SendingTime": "2023-05-19T21:38:56.6862643+04:00"
       }
     ],
-    "Age": 25,
-    "Email": "rustamh2006@gmail.com",
-    "Password": "2000rustam",
-    "Username": "hasan"
+    "Age": 23,
+    "Email": "hasanabdullazad@gmail.com",
+    "Password": "2000Hasan",
+    "Username": "hasanhttps"
   }
 ]

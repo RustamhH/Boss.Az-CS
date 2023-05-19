@@ -32,7 +32,7 @@ namespace Final_Project_x_Boss.Az.Models
                         if(cv.Id.ToString()==applyid)
                         {
                             // processlere elave olunsun , workerin notificationu ve maili
-                            Notification notification = new("New Request", $"Dear {worker.Username} , your CV with [{applyid}] id applied by our company . See you in interview . Best regards , {Username}", this);
+                            Notification notification = new("New Request", $"Dear {worker.Username} , your CV with [{applyid}] id applied by our company . See you in interview . Best regards , {Username}", Username);
                             worker.Notifications!.Add(notification);
                             SendMail(worker.Email, notification);
                             database.DefaultAdmin.AddProcess(new($"{Username} applyed {worker.Username} s CV with [{applyid}] id"));
@@ -116,7 +116,7 @@ namespace Final_Project_x_Boss.Az.Models
                 Vacancy vacancy;
                 try
                 {
-                    vacancy = new(this, category, profession, salary, req, minage, maxage, degree, experincetime,package);
+                    vacancy = new(category, profession, salary, req, minage, maxage, degree, experincetime,package);
                 }
                 catch(Exception ex)
                 {
@@ -126,8 +126,8 @@ namespace Final_Project_x_Boss.Az.Models
                 }
                 // admine notification gedib yoxlanilmali,eger admin qebul etse liste elave olunur,
                 // employere mail ve notification gedir , processlere elave olunur.
-                database.DefaultAdmin!.Notifications!.Add(new("New Vacancy Creation", $"{Username} created a new vacancy.Check your requests to verify this vacancy", this));
-                database.DefaultAdmin!.AddRequestedVacancies(vacancy);
+                database.DefaultAdmin!.Notifications!.Add(new("New Vacancy Creation", $"{Username} created a new vacancy.Check your requests to verify this vacancy", Username));
+                database.DefaultAdmin!.AddRequestedVacancies(Id,vacancy);
             }
 
 

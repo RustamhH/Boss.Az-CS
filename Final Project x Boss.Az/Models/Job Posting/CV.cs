@@ -21,9 +21,7 @@ namespace Final_Project_x_Boss.Az.Models
             private string _linkedin;
             private Packages _package;
 
-            [JsonIgnore]
-            public Worker Owner { get; set; }
-            public Guid OwnerId { get; init; }
+            
             public Guid Id { get; init; }
             public Categories Category { get; init; }
             public DateTime StartTime { get; init; }
@@ -114,12 +112,11 @@ namespace Final_Project_x_Boss.Az.Models
                 Languages = new();
             }
 
-            public CV(Worker owner, Categories category, string school, double universityAcceptanceGrade,
+            public CV(Categories category, string school, double universityAcceptanceGrade,
                   List<string> skills, List<string> companies,
                   List<string> languages,
                   bool hasDiploma, string prof, string gitLink, string linkedIn, double wantingSalary,Packages package) : this()
             {
-                Owner = owner;
                 Category = category;
                 School = school;
                 UniversityAcceptanceGrade = universityAcceptanceGrade;
@@ -143,34 +140,28 @@ namespace Final_Project_x_Boss.Az.Models
             public override string ToString()
             {
                 string MainText =
-                $@"
-        Category: {Category}                                View Count: {ViewCount} | CV Id:{Id} | {Package} package CV                      
-            {Profession}
-            {WantingSalary} AZN
-            
-            Start Time: {StartTime.Date.ToShortDateString()}         Linkedin: {LinkedIn}
-            End Time: {EndTime.Date.ToShortDateString()}           GitHub: {GitLink}
-           
-            Education:                               
-                Profession: {Profession}
-                School:{School}
-                Uni Acceptance Grade:{UniversityAcceptanceGrade}
-                Has Diplom: {HasDiplom}
-            ";
-                MainText += "\n\t    Skills:\n\n";
+                    $"Category: {Category}             View Count: {ViewCount} | CV Id:{Id}\n" +
+                    $"Profession: {Profession}                                 | {Package} package CV\n" +
+                    $"Start Time: {StartTime.Date.ToShortDateString()}         Linkedin: {LinkedIn}\n" +
+                    $"End Time: {EndTime.Date.ToShortDateString()}           GitHub: {GitLink}\n" +
+                    $"Profession: {Profession}\n" +
+                    $"School:{School}\n" +
+                    $"Uni Acceptance Grade:{UniversityAcceptanceGrade}\n" +
+                    $"Has Diplom: {HasDiplom}\n";
+                MainText += "Skills:\n";
                 foreach (var item in Skills)
                 {
-                    MainText += "\t\t\t" + item + "\n";
+                    MainText += item + "\n";
                 }
-                MainText += "\n\t    Companies:\n\n";
+                MainText += "\nCompanies:\n";
                 foreach (var item in Companies)
                 {
-                    MainText += "\t\t\t" + item + "\n";
+                    MainText += item + "\n";
                 }
-                MainText += "\n\t    Languages:\n\n";
+                MainText += "\nLanguages:\n";
                 foreach (var item in Languages)
                 {
-                    MainText += "\t\t\t" + item+ "\n";
+                    MainText += item+ "\n";
                 }
                 return MainText;
             }

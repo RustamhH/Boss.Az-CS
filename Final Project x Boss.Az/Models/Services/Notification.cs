@@ -16,16 +16,18 @@ namespace Final_Project_x_Boss.Az.Models
             public string? Title { get; init; }
             public string? Content { get; init; }
 
-            [JsonIgnore]
-            public Person? FromWho { get; init; }
+            public string? FromWho { get; init; }
             public DateTime SendingTime { get; init; }
+
+
+
 
             public Notification()
             {
                 Id = Guid.NewGuid();
             }
 
-            public Notification(string? title, string? content, Person? fromWho) : this()
+            public Notification(string? title, string? content, string? fromWho) : this()
             {
                 Title = title;
                 Content = content;
@@ -35,12 +37,13 @@ namespace Final_Project_x_Boss.Az.Models
 
             public string ShortData()
             {
-                return $"Id:{Id}\nFrom:{FromWho!.Username}";
+                return $"Id:{Id}\nFrom:{FromWho!}";
             }
             public string LongData()
             {
-                return $"Id:{Id}\nFrom:{FromWho!.Username}\nSending Time:{SendingTime}\nTitle:{Title}\nContent:\n{Content}";
+                return $"Id:{Id}\nFrom:{FromWho!}\nSending Time:{SendingTime}\nTitle:{Title}\nContent:\n{Content}";
             }
+
 
         }
     }

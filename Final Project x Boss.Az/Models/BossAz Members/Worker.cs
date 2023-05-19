@@ -29,7 +29,7 @@ namespace Final_Project_x_Boss.Az.Models
                     {
                         if (vacancy.Id.ToString() == applyid)
                         {
-                            Console.Write("Which of your CV you want to apply ? Enter ID: ");
+                            Console.WriteLine("Which of your CV you want to apply ? Enter ID: ");
                             ShowMyCVs(false);
                             string id = FixId();
                             CV cv = CVSearchById(id);
@@ -37,7 +37,7 @@ namespace Final_Project_x_Boss.Az.Models
                             {
                                 // processlere elave olunsun , workerin notificationu ve maili
                                 database.DefaultAdmin.AddProcess(new($"{Username} applyed {employer.Username} s vacancy with [{applyid}] id"));
-                                Notification notification = new("New Request", $"{cv}", this);
+                                Notification notification = new("New Request", $"{cv}", Username);
                                 employer.Notifications!.Add(notification);
                                 SendMail(employer.Email, notification);
                             }
@@ -195,7 +195,7 @@ namespace Final_Project_x_Boss.Az.Models
                 CV cv;
                 try
                 {
-                    cv = new(this,category, school, unigrade, skills, companies, languages, hasdiplom, profession, gitlink, linkedin, wantingsalary, package);
+                    cv = new(category, school, unigrade, skills, companies, languages, hasdiplom, profession, gitlink, linkedin, wantingsalary, package);
                 }
                 catch(Exception ex)
                 {
@@ -203,8 +203,8 @@ namespace Final_Project_x_Boss.Az.Models
                     Console.ReadKey(true);
                     return;
                 }
-                database.DefaultAdmin!.Notifications!.Add(new("New CV Creation", $"{Username} created a new CV.Check your requests to verify this CV", this));
-                database.DefaultAdmin!.AddRequestedCV(cv);
+                database.DefaultAdmin!.Notifications!.Add(new("New CV Creation", $"{Username} created a new CV.Check your requests to verify this CV", Username));
+                database.DefaultAdmin!.AddRequestedCV(Id,cv);
             }
 
 

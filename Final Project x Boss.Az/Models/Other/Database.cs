@@ -91,7 +91,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 {
                     Workers.Remove(item);
                     CurrentAdmin!.AddProcess(new Process($"{CurrentAdmin.Username} deleted worker {item.Username}'s account"));
-                    SendMail(item.Email, new Notification("Your Account is deleted", "Your account has been deleted by Boss.Az admins", CurrentAdmin));
+                    SendMail(item.Email, new Notification("Your Account is deleted", "Your account has been deleted by Boss.Az admins", CurrentAdmin.Username));
                     SaveWorkers();
                     Console.WriteLine("Worker Deleted");
                     return;
@@ -107,7 +107,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 {
                     Employers.Remove(item);
                     CurrentAdmin!.AddProcess(new Process($"{CurrentAdmin.Username} deleted employer {item.Username}'s account"));
-                    SendMail(item.Email, new Notification("Your Account is deleted", "Your account has been deleted by Boss.Az admins", CurrentAdmin));
+                    SendMail(item.Email, new Notification("Your Account is deleted", "Your account has been deleted by Boss.Az admins", CurrentAdmin.Username));
                     SaveEmployers();
                     Console.WriteLine("Employer Deleted");
                     return;
@@ -125,7 +125,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             {
                 CurrentAdmin = DefaultAdmin;
                 CurrentAdmin!.AddProcess(new Process($"{CurrentAdmin.Username} logged into his/her account"));
-                SendMail(CurrentAdmin.Email, new("Login Successful", "You have logged in sucessfully", CurrentAdmin));
+                SendMail(CurrentAdmin.Email, new("Login Successful", "You have logged in sucessfully", CurrentAdmin.Username));
                 return true;
             }
             return false;
@@ -139,8 +139,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 {
                     CurrentWorker = item;
                     DefaultAdmin!.AddProcess(new Process($"{CurrentWorker.Username} logged into his/her account"));
-                    DefaultAdmin!.Notifications!.Add(new("New Login", $"{CurrentWorker.Username} logged into his/her account", CurrentWorker));
-                    SendMail(CurrentWorker.Email, new("Logged in", "You have logged in to your Boss.Az account successfully", DefaultAdmin));
+                    DefaultAdmin!.Notifications!.Add(new("New Login", $"{CurrentWorker.Username} logged into his/her account", CurrentWorker.Username));
+                    SendMail(CurrentWorker.Email, new("Logged in", "You have logged in to your Boss.Az account successfully", DefaultAdmin.Username));
                     return true;
                 }
             }
@@ -150,8 +150,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 {
                     CurrentEmployer = item;
                     DefaultAdmin!.Processes.Add(new Process($"{CurrentEmployer.Username} logged into his/her account"));
-                    DefaultAdmin!.Notifications!.Add(new("New Login", $"{CurrentEmployer.Username} logged into his/her account", CurrentEmployer));
-                    SendMail(CurrentEmployer.Email, new("Logged in", "You have logged in to your Boss.Az account successfully", DefaultAdmin));
+                    DefaultAdmin!.Notifications!.Add(new("New Login", $"{CurrentEmployer.Username} logged into his/her account", CurrentEmployer.Username));
+                    SendMail(CurrentEmployer.Email, new("Logged in", "You have logged in to your Boss.Az account successfully", DefaultAdmin.Username));
                     return true;
                 }
             }
@@ -207,9 +207,12 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 worker.MyCVs.Sort((c1, c2) => c1.ViewCount.CompareTo(c2.ViewCount));
                 foreach (var cv in worker.MyCVs)
                 {
-                    if (isLong) Console.WriteLine(cv);
-                    else Console.WriteLine(cv.ShortInfo());
-                    Console.WriteLine();
+                    if(cv.Category==category)
+                    {
+                        if (isLong) Console.WriteLine(cv);
+                        else Console.WriteLine(cv.ShortInfo());
+                        Console.WriteLine();
+                    }
                 }
             }
         }
@@ -224,9 +227,12 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 worker.MyCVs.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var cv in worker.MyCVs)
                 {
-                    if (isLong) Console.WriteLine(cv);
-                    else Console.WriteLine(cv.ShortInfo());
-                    Console.WriteLine();
+                    if(cv.WantingSalary>=minimumsalary)
+                    {
+                        if (isLong) Console.WriteLine(cv);
+                        else Console.WriteLine(cv.ShortInfo());
+                        Console.WriteLine();
+                    }
                 }
             }
         }
@@ -250,9 +256,12 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 worker.MyCVs.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var cv in worker.MyCVs)
                 {
-                    if (isLong) Console.WriteLine(cv);
-                    else Console.WriteLine(cv.ShortInfo());
-                    Console.WriteLine();
+                    if(cv.Package==Packages.Premium)
+                    {
+                        if (isLong) Console.WriteLine(cv);
+                        else Console.WriteLine(cv.ShortInfo());
+                        Console.WriteLine();
+                    }
                 }
             }
         }
@@ -271,7 +280,6 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 {
                     if (isLong) Console.WriteLine(vacancy);
                     else Console.WriteLine(vacancy.ShortInfo());
-                    Console.WriteLine();
                 }
             }
         }
@@ -285,9 +293,12 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
-                    if (isLong) Console.WriteLine(vac);
-                    else Console.WriteLine(vac.ShortInfo());
-                    Console.WriteLine();
+                    if(vac.Category==category)
+                    {
+                        if (isLong) Console.WriteLine(vac);
+                        else Console.WriteLine(vac.ShortInfo());
+                        Console.WriteLine();
+                    }
                 }
             }
         }
@@ -301,9 +312,12 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
-                    if (isLong) Console.WriteLine(vac);
-                    else Console.WriteLine(vac.ShortInfo());
-                    Console.WriteLine();
+                    if(vac.OfferedSalary>=minimumSalary)
+                    {
+                        if (isLong) Console.WriteLine(vac);
+                        else Console.WriteLine(vac.ShortInfo());
+                        Console.WriteLine();
+                    }
                 }
             }
         }
@@ -318,9 +332,12 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
-                    if (isLong) Console.WriteLine(vac);
-                    else Console.WriteLine(vac.ShortInfo());
-                    Console.WriteLine();
+                    if(vac.ExperienceTime>=minimumexperiencetime)
+                    {
+                        if (isLong) Console.WriteLine(vac);
+                        else Console.WriteLine(vac.ShortInfo());
+                        Console.WriteLine();
+                    }
                 }
             }
         }
@@ -335,9 +352,12 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 employer.MyVacancies.Sort((v1, v2) => v1.ViewCount.CompareTo(v2.ViewCount));
                 foreach (var vac in employer.MyVacancies)
                 {
-                    if (isLong) Console.WriteLine(vac);
-                    else Console.WriteLine(vac.ShortInfo());
-                    Console.WriteLine();
+                    if(vac.Package==Packages.Premium)
+                    {
+                        if (isLong) Console.WriteLine(vac);
+                        else Console.WriteLine(vac.ShortInfo());
+                        Console.WriteLine();
+                    }
                 }
             }
         }
@@ -372,8 +392,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 Console.ReadKey(true);
                 return;
             }
-            DefaultAdmin!.Notifications!.Add(new("CV deletion", $"{CurrentWorker.Username} deleted his/her CV with [{id}] id", CurrentWorker));
-            SendMail(CurrentWorker.Email, new("CV deleted", $"Your CV with {id} has been deleted successfully", DefaultAdmin));
+            DefaultAdmin!.Notifications!.Add(new("CV deletion", $"{CurrentWorker.Username} deleted his/her CV with [{id}] id", CurrentWorker.Username));
+            SendMail(CurrentWorker.Email, new("CV deleted", $"Your CV with {id} has been deleted successfully", DefaultAdmin.Username));
             DefaultAdmin.AddProcess(new($"{CurrentWorker.Username} has deleted his/her CV with [{id}]"));
             SaveWorkers();
         }
@@ -390,8 +410,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 Console.ReadKey(true);
                 return;
             }
-            DefaultAdmin!.Notifications!.Add(new("Vacancy deletion", $"{CurrentEmployer.Username} deleted his/her vacancy with [{id}] id", CurrentEmployer));
-            SendMail(CurrentEmployer.Email, new("Vacancy deleted", $"Your vacancy with {id} has been deleted successfully", DefaultAdmin));
+            DefaultAdmin!.Notifications!.Add(new("Vacancy deletion", $"{CurrentEmployer.Username} deleted his/her vacancy with [{id}] id", CurrentEmployer.Username));
+            SendMail(CurrentEmployer.Email, new("Vacancy deleted", $"Your vacancy with {id} has been deleted successfully", DefaultAdmin.Username));
             DefaultAdmin.AddProcess(new($"{CurrentEmployer.Username} has deleted his/her vacancy with [{id}]"));
             SaveWorkers();
         }

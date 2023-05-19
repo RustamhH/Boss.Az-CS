@@ -39,9 +39,17 @@ namespace Final_Project_x_Boss.Az
 
             //database.AddEmployer(employer);
             //database.AddWorker(worker);
-            
 
 
+            string MYLOGO =
+                @"
+                                     ______                                  
+                                    (____  \                    /\           
+                                     ____)  ) ___   ___  ___   /  \  _____   
+                                    |  __  ( / _ \ /___)/___) / /\ \(___  )  
+                                    | |__)  ) |_| |___ |___ || |__| |/ __/   
+                                    |______/ \___/(___/(___(_)______(_____)  
+                ";
 
 
 
@@ -54,6 +62,8 @@ namespace Final_Project_x_Boss.Az
 
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine(MYLOGO);
                 int MainChoice = Print(new List<string> { "Admin", "User", "Job Postings", "Exit" },  mainx,  mainy);
 
                 if (MainChoice == 0)
@@ -324,7 +334,7 @@ namespace Final_Project_x_Boss.Az
                                             else if (EmployerChoice == 2)
                                             {
                                                 database.CurrentEmployer!.ShowMyVacancies(false);
-                                                database.DefaultAdmin.AddProcess(new($"{database.CurrentWorker!.Username} checked his/her vacancies"));
+                                                database.DefaultAdmin.AddProcess(new($"{database.CurrentEmployer!.Username} checked his/her vacancies"));
                                                 string deleteId = FixId();
                                                 database.EmployerVacancyDeletion(deleteId);
                                             }
@@ -335,7 +345,7 @@ namespace Final_Project_x_Boss.Az
                                             else if (EmployerChoice == 4)
                                             {
                                                 database.CurrentEmployer!.ShowMyVacancies();
-                                                database.DefaultAdmin.AddProcess(new($"{database.CurrentWorker!.Username} checked his/her vacancies"));
+                                                database.DefaultAdmin.AddProcess(new($"{database.CurrentEmployer!.Username} checked his/her vacancies"));
                                                 Console.ReadKey(true);
                                             }
                                             else if (EmployerChoice == 5)
@@ -374,10 +384,7 @@ namespace Final_Project_x_Boss.Az
                         int JobSearchChoices = Print(new List<string> { "CVs", "Vacancies","Exit" },mainx,mainy);
                         if (JobSearchChoices == 0)
                         {
-                            
-                            // CvSearchAlgorithm(ref database);
-                            
-                            Console.ReadKey(true);
+                            CVSearchAlgorithm(ref database);                            
                         }
                         else if (JobSearchChoices == 1)
                         {
