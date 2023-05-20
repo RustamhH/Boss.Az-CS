@@ -29,6 +29,7 @@ namespace Final_Project_x_Boss.Az.Models
                 {
                     foreach (var cv in worker.MyCVs)
                     {
+                        cv.ViewCount++;
                         if(cv.Id.ToString()==applyid)
                         {
                             // processlere elave olunsun , workerin notificationu ve maili

@@ -27,6 +27,7 @@ namespace Final_Project_x_Boss.Az.Models
                 {
                     foreach (var vacancy in employer.MyVacancies)
                     {
+                        vacancy.ViewCount++;
                         if (vacancy.Id.ToString() == applyid)
                         {
                             Console.WriteLine("Which of your CV you want to apply ? Enter ID: ");
