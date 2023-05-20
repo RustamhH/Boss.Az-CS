@@ -170,7 +170,8 @@ namespace Final_Project_x_Boss.Az.Models
 
             public string ShortInfo()
             {
-                return $@"
+                return 
+            $@"
             {Id}
             {Profession}
             {WantingSalary} AZN

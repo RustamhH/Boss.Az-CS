@@ -101,7 +101,7 @@ namespace Final_Project_x_Boss.Az
                                         Console.ReadKey(true);
                                     }
                                     else if (AdminChoice == 1)
-                                    {
+                                    {s
 
                                         while (true)
                                         {
@@ -384,11 +384,15 @@ namespace Final_Project_x_Boss.Az
                         int JobSearchChoices = Print(new List<string> { "CVs", "Vacancies","Exit" },mainx,mainy);
                         if (JobSearchChoices == 0)
                         {
-                            CVSearchAlgorithm(ref database);                            
+                            CVSearchAlgorithm(ref database);
+                            Console.ReadKey(true);
+                            Console.Clear();
                         }
                         else if (JobSearchChoices == 1)
                         {
                             VacancySearchAlgorithm(ref database);
+                            Console.ReadKey(true);
+                            Console.Clear();
                         }
                         else break;
                     }

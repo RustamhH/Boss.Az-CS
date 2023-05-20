@@ -27,17 +27,13 @@ namespace Final_Project_x_Boss.Az.Models
             public Dictionary<Guid,List<Vacancy>> RequestedVacancies { get; set; }
             public Dictionary<Guid, List<CV>> RequestedCV { get; set; }
             public Admin()
-            {
-               RequestedCV = new();
-               RequestedVacancies = new();
+            { 
                SetRequestedCVsFromFile();
                SetRequestedVacanciesFromFile();
                SetProcessesFromFile();
             }
             public Admin(string name, string surname, int age, string username,string email, string password) : base(name, surname, age, username,email, password)
             {
-                RequestedCV = new();
-                RequestedVacancies = new();
                 SetRequestedCVsFromFile();
                 SetRequestedVacanciesFromFile();
                 SetProcessesFromFile();
@@ -149,26 +145,26 @@ namespace Final_Project_x_Boss.Az.Models
                             {
                                 Notification not = default;
                                 int x = 66, y = 11;
+                                Console.Clear();
                                 int choice = Functions.Print(new List<string> { "Vacancy Appropriate", "Vacancy Inappropriate" }, x, y);
                                 if (choice == 0)
                                 {
                                     AddProcess(new Process($"Admin {Username} accepted employer {employer.Username}'s vacancy request"));
                                     not = new Notification("Good Vacancy", $"Your Vacancy with [{item1.Id}] id accepted by Boss.Az admins", Username);
-                                    employer.Notifications!.Add(not);
-                                    Functions.SendMail(employer.Email, not);
-                                    RequestedVacancies.Remove(item.Key);
                                     employer.AddVacancy(item1);
                                     database.SaveEmployers();
-                                    SaveRequestedVacancies();
-                                    return;
                                 }
-
-                                not = new Notification("Bad Vacancy", $"Your Vacancy with [{item1.Id}] id  rejected by Boss.Az admins", Username);
-                                Functions.SendMail(employer.Email, not);
+                                else
+                                {
+                                    not = new Notification("Bad Vacancy", $"Your Vacancy with [{item1.Id}] id  rejected by Boss.Az admins", Username);
+                                    AddProcess(new Process($"Admin {Username} rejected employer {employer.Username}'s vacancy request"));
+                                }
                                 employer.Notifications!.Add(not);
-                                RequestedVacancies.Remove(item.Key);
-                                AddProcess(new Process($"Admin {Username} rejected employer {employer.Username}'s vacancy request"));
+                                Functions.SendMail(employer.Email, not);
+                                RequestedVacancies[item.Key].Remove(item1);
+                                if (RequestedVacancies[item.Key].Count == 0) RequestedVacancies.Remove(item.Key);
                                 SaveRequestedVacancies();
+                                return;
                             }
                             else
                             {
@@ -194,28 +190,27 @@ namespace Final_Project_x_Boss.Az.Models
                             {
                                 Notification not = default;
                                 int x = 66, y = 11;
+                                Console.Clear();
                                 int choice = Functions.Print(new List<string> { "CV Appropriate", "CV Inappropriate" }, x, y);
                                 if (choice == 0)
                                 {
                                     AddProcess(new Process($"Admin {Username} accepted worker {worker.Username}'s CV request"));
                                     not = new Notification("Good Vacancy", $"Your Vacancy with [{item1.Id}] id accepted by Boss.Az admins", Username);
-                                    worker.Notifications!.Add(not);
-                                    Functions.SendMail(worker.Email, not);
                                     worker.AddCV(item1);
-                                    RequestedCV.Remove(item.Key);
-                                    SaveRequestedCVs();
                                     database.SaveWorkers();
-                                    return;
+                                }
+                                else
+                                {
+                                    not = new Notification("Bad CV", $"Your CV with [{item1.Id}] id rejected by Boss.Az admins", Username);
+                                    AddProcess(new Process($"Admin {Username} rejected worker {worker.Username}'s CV request"));
                                 }
 
-
-
-                                not = new Notification("Bad CV", $"Your CV with [{item1.Id}] id rejected by Boss.Az admins", Username);
-                                Functions.SendMail(worker.Email, not);
                                 worker.Notifications!.Add(not);
-                                AddProcess(new Process($"Admin {Username} rejected worker {worker.Username}'s CV request"));
-                                RequestedCV.Remove(item.Key);
+                                Functions.SendMail(worker.Email, not);
+                                RequestedCV[item.Key].Remove(item1);
+                                if (RequestedCV[item.Key].Count == 0) RequestedCV.Remove(item.Key);
                                 SaveRequestedCVs();
+                                return;
                             }
                             else
                             {

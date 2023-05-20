@@ -59,6 +59,7 @@ namespace Final_Project_x_Boss.Az.Models
                 
                 int categoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(),x,y);
                 Enum.TryParse(categoryChoice.ToString(), out category);
+                Console.ForegroundColor = ConsoleColor.White;
                 do
                 {
                     Console.Write("What profession should our applyer have? ");
