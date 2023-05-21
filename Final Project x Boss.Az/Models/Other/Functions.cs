@@ -14,9 +14,22 @@ using Final_Project_x_Boss.Az.Models.AdminNamespace;
 
 namespace Final_Project_x_Boss.Az.Models.Other
 {
-    internal static class Functions
+    internal static partial class Functions
     {
-        public static void SendMail(string toMail, Notification notification)
+        public static partial void SendMail(string toMail, Notification notification);
+        public static partial int Print<T>(List<T> arr, int x, int y);
+        public static partial KeyValuePair<string, string> FixEmailPassword();
+        public static partial string FixId();
+        public static partial void UserRegistration(ref Database database, User user);
+        public static partial void VacancySearchAlgorithm(ref Database database, bool isLong = true);
+        public static partial void CVSearchAlgorithm(ref Database database, bool isLong = true);
+    }
+
+
+
+    internal static partial class Functions
+    {
+        public static partial void SendMail(string toMail, Notification notification)
         {
 
             MailMessage message = new MailMessage();
@@ -35,7 +48,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             Console.WriteLine("Mail Sending ...");
             smtpClient.Send(message);
         }
-        public static int Print<T>(List<T> arr, int x, int y)
+        public static partial int Print<T>(List<T> arr, int x, int y)
         {
             int index = 0;
             while (true)
@@ -74,9 +87,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 }
             }
         }
-
-
-        public static KeyValuePair<string, string> FixEmailPassword()
+        public static partial KeyValuePair<string, string> FixEmailPassword()
         {
             string email, password;
             do
@@ -92,9 +103,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
             return new(email, password);
         }
-
-
-        public static string FixId()
+        public static partial string FixId()
         {
             string? id;
             do
@@ -104,16 +113,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
             } while (id == null || id == "");
             return id;
         }
-
-
-
-
-        
-
-
-
-
-        public static void UserRegistration(ref Database database, User user)
+        public static partial void UserRegistration(ref Database database, User user)
         {
             string name, surname, username, email, password, city, phone;
             double realbudget;
@@ -206,10 +206,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 return;
             }
         }
-
-
-
-        public static void VacancySearchAlgorithm(ref Database database,bool isLong=true)
+        public static partial void VacancySearchAlgorithm(ref Database database, bool isLong = true)
         {
             int searchx = 100, searchy = 2;
             int filterornot = Print(new List<string> { "Use filter", "Don't use filter" }, searchx, searchy);
@@ -219,7 +216,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 while (true)
                 {
 
-                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Experience Time", "By Premium","Exit" }, searchx, searchy);
+                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Experience Time", "By Premium", "Exit" }, searchx, searchy);
                     if (filteringchoice == 0)
                     {
                         Categories category;
@@ -259,11 +256,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        
-        
-        
-        
-        public static void CVSearchAlgorithm(ref Database database,bool isLong=true)
+        public static partial void CVSearchAlgorithm(ref Database database, bool isLong = true)
         {
             int searchx = 100, searchy = 2;
             int filterornot = Print(new List<string> { "Use filter", "Don't use filter" }, searchx, searchy);
@@ -273,7 +266,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 while (true)
                 {
 
-                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Premium","Exit" }, searchx, searchy);
+                    int filteringchoice = Print(new List<string> { "By Category", "By Salary", "By Premium", "Exit" }, searchx, searchy);
                     if (filteringchoice == 0)
                     {
                         Categories category;
@@ -308,15 +301,6 @@ namespace Final_Project_x_Boss.Az.Models.Other
 
             }
         }
-
-
-
-
-
-
-
-        
-
     }
 
 }

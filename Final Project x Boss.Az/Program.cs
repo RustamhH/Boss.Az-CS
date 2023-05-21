@@ -33,14 +33,7 @@ namespace Final_Project_x_Boss.Az
 
 
 
-            // Worker worker = new("WWW","SALAM",22,"RustamH","rustamh2006@gmail.com","rustam2006","Baku","0513940859",1111);
-            // worker.AddCV(new(Categories.Finance, "a", 1, new() { "a" }, new() { "b" }, new() { "c" }, true, "aswe", "ffff.github.com", "etft.linkedin.com", 345, Packages.Basic, DateTime.Now));
-            // worker.AddCV(new(Categories.Medicine, "a", 1, new() { "a" }, new() { "b" }, new() { "c" }, true, "aswe", "ffff.github.com", "etft.linkedin.com", 684, Packages.Basic, DateTime.Now));
-            // database.AddWorker(worker);
             
-            
-            //Employer employer = new("Hesen","Abdullazade",21,"HasanHttps","hasanabdullazad@gmail.com","hasan2222","Baku","0554876502",8123);
-            //database.AddEmployer(employer);
 
             string MYLOGO =
                 @"
