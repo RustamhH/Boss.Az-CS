@@ -18,7 +18,9 @@ namespace Final_Project_x_Boss.Az.Models
             private int _viewcount;
             private int _experiencetime;
             private double _offeredsalary;
-            Packages _package;
+
+
+            public List<Guid> Applyers { get; set; }
             public Categories Category { get; set; }
             public Guid Id { get; set; }
             public DateTime StartTime { get; set; }
@@ -32,14 +34,7 @@ namespace Final_Project_x_Boss.Az.Models
 
 
 
-            public Packages Package { get=>_package;
-                set
-                {
-                    if(value==Packages.Basic) { EndTime = DateTime.Now.AddMonths(1); }
-                    else { EndTime = DateTime.Now.AddYears(1); }
-                    _package = value;
-                } 
-            }
+            public Packages Package { get; set; }
             public int ViewCount
             {
                 get => _viewcount;
@@ -72,7 +67,14 @@ namespace Final_Project_x_Boss.Az.Models
 
 
 
-
+            public bool FindApplyer(Guid id)
+            {
+                foreach (var item in Applyers)
+                {
+                    if (item == id) return true;
+                }
+                return false;
+            }
 
 
             public override string ToString()
@@ -104,11 +106,13 @@ namespace Final_Project_x_Boss.Az.Models
             {OfferedSalary} AZN
             ";
             }
-            public Vacancy() { Id = Guid.NewGuid(); }
+            public Vacancy() {
+                Applyers = new();
+                Id = Guid.NewGuid(); }
 
             public Vacancy(Categories category
             ,string profession, double offeredSalary, string requirements,  ushort minimumAge,
-            ushort maximumAge, string degree, int experienceTime, Packages package) : this()
+            ushort maximumAge, string degree, int experienceTime, Packages package,DateTime endTime) : this()
             {
                 Category = category;
                 StartTime = DateTime.Now;
@@ -121,6 +125,7 @@ namespace Final_Project_x_Boss.Az.Models
                 Degree = degree;
                 ExperienceTime = experienceTime;
                 Package = package;
+                EndTime = endTime;
             }
         }
     }

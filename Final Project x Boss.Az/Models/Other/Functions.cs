@@ -32,6 +32,7 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 Credentials = new NetworkCredential("consolebossaz@gmail.com", "tpwveajrwdjqrqsf"),
                 EnableSsl = true,
             };
+            Console.WriteLine("Mail Sending ...");
             smtpClient.Send(message);
         }
         public static int Print<T>(List<T> arr, int x, int y)
@@ -248,12 +249,14 @@ namespace Final_Project_x_Boss.Az.Models.Other
                     {
                         database.ShowPremiumVacancies(isLong);
                     }
-                    else break;
+                    else VacancySearchAlgorithm(ref database);
                 }
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else
             {
                 database.ShowVacancies(isLong);
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
         
@@ -294,12 +297,15 @@ namespace Final_Project_x_Boss.Az.Models.Other
                         database.ShowPremiumCVs(isLong);
                         Console.ReadKey(true);
                     }
-                    else break;
+                    else CVSearchAlgorithm(ref database);
                 }
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else
             {
                 database.ShowCVs(isLong);
+                Console.ForegroundColor = ConsoleColor.White;
+
             }
         }
 

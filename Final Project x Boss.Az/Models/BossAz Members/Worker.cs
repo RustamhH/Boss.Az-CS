@@ -30,7 +30,13 @@ namespace Final_Project_x_Boss.Az.Models
                         vacancy.ViewCount++;
                         if (vacancy.Id.ToString() == applyid)
                         {
-                            Console.WriteLine("Which of your CV you want to apply ? Enter ID: ");
+                            if(vacancy.FindApplyer(Id))
+                            {
+                                Console.WriteLine("You already applyed to this vacancy");
+                                Console.ReadKey(true);
+                                return;
+                            }
+                            Console.WriteLine("Which of your CV you want to apply ?");
                             ShowMyCVs(false);
                             string id = FixId();
                             CV cv = CVSearchById(id);
@@ -41,11 +47,13 @@ namespace Final_Project_x_Boss.Az.Models
                                 Notification notification = new("New Request", $"{cv}", Username);
                                 employer.Notifications!.Add(notification);
                                 SendMail(employer.Email, notification);
+                                vacancy.Applyers.Add(Id);
                             }
 
                         }
                     }
                 }
+                database.SaveEmployers();
             }
 
             public CV CVSearchById(string id)
@@ -105,7 +113,8 @@ namespace Final_Project_x_Boss.Az.Models
                 ///////////////////////////////////////////////////////
                 
                 Categories category; // +
-                Packages package;   
+                Packages package;
+                DateTime end;
                 string profession, school, gitlink, linkedin, skillinput,companyinput,languagesinput; // +
                 double unigrade,wantingsalary; // +
                 bool hasdiplom; // +
@@ -183,12 +192,14 @@ namespace Final_Project_x_Boss.Az.Models
                     if (Budget < 10) return;
                     Budget -= 10;
                     package = Packages.Basic;
+                    end = DateTime.Now.AddMonths(1);
                 }
                 else
                 {
                     if (Budget < 50) return;
                     Budget -= 50;
                     package = Packages.Premium;
+                    end = DateTime.Now.AddYears(1);
                 }
 
 
@@ -196,12 +207,13 @@ namespace Final_Project_x_Boss.Az.Models
                 CV cv;
                 try
                 {
-                    cv = new(category, school, unigrade, skills, companies, languages, hasdiplom, profession, gitlink, linkedin, wantingsalary, package);
+                    cv = new(category, school, unigrade, skills, companies, languages, hasdiplom, profession, gitlink, linkedin, wantingsalary, package,end);
                 }
                 catch(Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.ReadKey(true);
+                    Console.Clear();
                     return;
                 }
                 database.DefaultAdmin!.Notifications!.Add(new("New CV Creation", $"{Username} created a new CV.Check your requests to verify this CV", Username));
@@ -216,15 +228,6 @@ namespace Final_Project_x_Boss.Az.Models
                 Text += $"CV count: {MyCVs.Count}\n";
                 return Text;
             }
-
-
-
-
-
-
-
-
-
 
         }
     }

@@ -20,7 +20,6 @@ namespace Final_Project_x_Boss.Az.Models
             public List<Vacancy> MyVacancies { get; set; }
 
 
-
             public void Apply(ref Database database)
             {
                 CVSearchAlgorithm(ref database);
@@ -40,6 +39,7 @@ namespace Final_Project_x_Boss.Az.Models
                         }
                     }
                 }
+                database.SaveWorkers();
             }
 
 
@@ -52,6 +52,7 @@ namespace Final_Project_x_Boss.Az.Models
                 
                 Categories category;
                 Packages package;
+                DateTime end;
                 string profession,degree,req;
                 double salary;
                 ushort minage, maxage;
@@ -93,7 +94,7 @@ namespace Final_Project_x_Boss.Az.Models
 
                 do
                 {
-                    Console.Write("How much experienced should our applyer be ? ");
+                    Console.Write("At least how much experienced should our applyer be (enter year count) ? ");
                 } while (!int.TryParse(Console.ReadLine(), out experincetime));
 
                 do
@@ -108,22 +109,26 @@ namespace Final_Project_x_Boss.Az.Models
                     if (Budget < 10) return;
                     Budget -= 10;
                     package = Packages.Basic;
+                    end = DateTime.Now.AddMonths(1);
                 }
                 else
                 {
                     if (Budget < 50) return;
                     Budget -= 50;
                     package = Packages.Premium;
+                    end = DateTime.Now.AddYears(1);
+                    
                 }
                 Vacancy vacancy;
                 try
                 {
-                    vacancy = new(category, profession, salary, req, minage, maxage, degree, experincetime,package);
+                    vacancy = new(category, profession, salary, req, minage, maxage, degree, experincetime,package,end);
                 }
                 catch(Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.ReadKey(true);
+                    Console.Clear();
                     return;
                 }
                 // admine notification gedib yoxlanilmali,eger admin qebul etse liste elave olunur,
@@ -152,7 +157,7 @@ namespace Final_Project_x_Boss.Az.Models
                         return;
                     }
                 }
-                throw new Exception("CV not found");
+                throw new Exception("Vacancy not found");
             }
             
 
@@ -179,23 +184,9 @@ namespace Final_Project_x_Boss.Az.Models
             public override string ToString()
             {
                 string Text = base.ToString();
-                Text += $"\t\tVacancies Count:{MyVacancies.Count}\n";
+                Text += $"Vacancies Count:{MyVacancies.Count}\n";
                 return Text;
             }
-
-
-
-
-
-
-
-
-            
-
-
-
-
-            
         }
     }
     

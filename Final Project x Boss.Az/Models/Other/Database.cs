@@ -425,7 +425,8 @@ namespace Final_Project_x_Boss.Az.Models.Other
                 if (item.Id.ToString()==worker) return item;
             }
             return null;
-        }public Employer FindEmployer(string employer)
+        }
+        public Employer FindEmployer(string employer)
         {
             foreach (var item in Employers)
             {

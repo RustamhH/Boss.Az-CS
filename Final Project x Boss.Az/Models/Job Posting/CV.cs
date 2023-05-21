@@ -19,7 +19,6 @@ namespace Final_Project_x_Boss.Az.Models
             private double _wantingsalary;
             private string _gitlink;
             private string _linkedin;
-            private Packages _package;
 
             
             public Guid Id { get; init; }
@@ -79,22 +78,12 @@ namespace Final_Project_x_Boss.Az.Models
                     _unigrade = value;
                 }
             }
-            
 
 
 
 
-            public Packages Package
-            {
-                get => _package;
-                set
-                {
-                    if (value == Packages.Basic) { EndTime = DateTime.Now.AddMonths(1); }
-                    else { EndTime = DateTime.Now.AddYears(1); }
-                    _package = value;
-                }
-            }
 
+            public Packages Package { get; set; }
 
 
 
@@ -115,7 +104,7 @@ namespace Final_Project_x_Boss.Az.Models
             public CV(Categories category, string school, double universityAcceptanceGrade,
                   List<string> skills, List<string> companies,
                   List<string> languages,
-                  bool hasDiploma, string prof, string gitLink, string linkedIn, double wantingSalary,Packages package) : this()
+                  bool hasDiploma, string prof, string gitLink, string linkedIn, double wantingSalary,Packages package,DateTime endtime) : this()
             {
                 Category = category;
                 School = school;
@@ -131,6 +120,7 @@ namespace Final_Project_x_Boss.Az.Models
                 ViewCount = 0;
                 Profession = prof;
                 Package = package;
+                EndTime = endtime;
             }
 
 

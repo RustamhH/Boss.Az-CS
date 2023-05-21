@@ -33,13 +33,14 @@ namespace Final_Project_x_Boss.Az
 
 
 
-            //Worker worker = new("Rustem","Hesenli",22,"RustamH","rustamh2006@gmail.com","rustam2006","Baku","0513940859",1111);
+            // Worker worker = new("WWW","SALAM",22,"RustamH","rustamh2006@gmail.com","rustam2006","Baku","0513940859",1111);
+            // worker.AddCV(new(Categories.Finance, "a", 1, new() { "a" }, new() { "b" }, new() { "c" }, true, "aswe", "ffff.github.com", "etft.linkedin.com", 345, Packages.Basic, DateTime.Now));
+            // worker.AddCV(new(Categories.Medicine, "a", 1, new() { "a" }, new() { "b" }, new() { "c" }, true, "aswe", "ffff.github.com", "etft.linkedin.com", 684, Packages.Basic, DateTime.Now));
+            // database.AddWorker(worker);
+            
+            
             //Employer employer = new("Hesen","Abdullazade",21,"HasanHttps","hasanabdullazad@gmail.com","hasan2222","Baku","0554876502",8123);
-
-
             //database.AddEmployer(employer);
-            //database.AddWorker(worker);
-
 
             string MYLOGO =
                 @"
@@ -54,7 +55,7 @@ namespace Final_Project_x_Boss.Az
 
 
 
-
+            
 
 
 
@@ -90,7 +91,6 @@ namespace Final_Project_x_Boss.Az
                             }
                             if (database.LoginAdmin(admin))
                             {
-
                                 while (true)
                                 {
                                     int AdminChoice = Print(new List<string> { "Notifications", "Show User", "Delete User", "Check Deadlines", "Check CVs", "Check Vacancies", "Show Previous Processes", "My Account", "Exit" },  mainx,  mainy);
@@ -101,7 +101,7 @@ namespace Final_Project_x_Boss.Az
                                         Console.ReadKey(true);
                                     }
                                     else if (AdminChoice == 1)
-                                    {s
+                                    {
 
                                         while (true)
                                         {
@@ -110,11 +110,13 @@ namespace Final_Project_x_Boss.Az
                                             {
                                                 database.ReadWorkers();
                                                 Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else if (ShowUserChoice == 1)
                                             {
                                                 database.ReadEmployers();
                                                 Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else break;
                                         }
@@ -137,6 +139,7 @@ namespace Final_Project_x_Boss.Az
                                                     Console.WriteLine(ex.Message);
                                                 }
                                                 Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else if (DeleteUserChoice == 1)
                                             {
@@ -151,6 +154,7 @@ namespace Final_Project_x_Boss.Az
                                                     Console.WriteLine(ex.Message);
                                                 }
                                                 Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else break;
                                         }
@@ -164,12 +168,14 @@ namespace Final_Project_x_Boss.Az
                                             database.CurrentAdmin!.CheckCVDeadlines(ref database);
                                             Console.WriteLine("All CVs have been checked");
                                             Console.ReadKey(true);
+                                            Console.Clear();
                                         }
                                         else
                                         {
                                             database.CurrentAdmin!.CheckVacancyDeadlines(ref database);
                                             Console.WriteLine("All vacancies have been checked");
                                             Console.ReadKey(true);
+                                            Console.Clear();
                                         }
                                     }
                                     else if (AdminChoice == 4)
@@ -190,11 +196,14 @@ namespace Final_Project_x_Boss.Az
                                     {
                                         database.CurrentAdmin!.ShowProcesses();
                                         Console.ReadKey(true);
+                                        Console.Clear();
+                                        
                                     }
                                     else if (AdminChoice == 7)
                                     {
                                         Console.WriteLine(database.CurrentAdmin!);
                                         database.CurrentAdmin!.AddProcess(new($"{database.CurrentAdmin.Username} checked his account"));
+                                        Console.Clear();
                                     }
                                     else break;
                                 }
@@ -240,6 +249,7 @@ namespace Final_Project_x_Boss.Az
                                     }
                                     if (database.LoginUser(user))
                                     {
+                                        Console.Clear();
                                         while (true)
                                         {
                                             int WorkerChoice = Print(new List<string> { "Notifications", "Add CV", "Delete CV", "Vacancies", "Show My CVs","My Account", "Exit" },  mainx,  mainy);
@@ -248,10 +258,12 @@ namespace Final_Project_x_Boss.Az
                                                 database.CurrentWorker!.ShowMyNotifications();
                                                 database.DefaultAdmin!.AddProcess(new($"{database.CurrentWorker.Username} checked his/her notifications"));
                                                 Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else if (WorkerChoice == 1)
                                             {
                                                 database.CurrentWorker!.CVCreation(ref database);
+ 
                                             }
                                             else if (WorkerChoice == 2)
                                             {
@@ -269,6 +281,7 @@ namespace Final_Project_x_Boss.Az
                                                 database.CurrentWorker!.ShowMyCVs();
                                                 database.DefaultAdmin.AddProcess(new($"{database.CurrentWorker.Username} checked his/her cv's"));
                                                 Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else if (WorkerChoice == 5)
                                             {
@@ -291,6 +304,7 @@ namespace Final_Project_x_Boss.Az
                                 else if (SignChoice == 1)
                                 {
                                     UserRegistration(ref database, user);
+                                    Console.Clear();
                                 }
                                 else break;
                             }
@@ -326,6 +340,7 @@ namespace Final_Project_x_Boss.Az
                                                 database.CurrentEmployer!.ShowMyNotifications();
                                                 database.DefaultAdmin!.AddProcess(new($"{database.CurrentEmployer.Username} checked his/her notifications"));
                                                 Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else if (EmployerChoice == 1)
                                             {
@@ -341,12 +356,15 @@ namespace Final_Project_x_Boss.Az
                                             else if (EmployerChoice == 3)
                                             {
                                                 database.CurrentEmployer!.Apply(ref database);
+                                                Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else if (EmployerChoice == 4)
                                             {
                                                 database.CurrentEmployer!.ShowMyVacancies();
                                                 database.DefaultAdmin.AddProcess(new($"{database.CurrentEmployer!.Username} checked his/her vacancies"));
                                                 Console.ReadKey(true);
+                                                Console.Clear();
                                             }
                                             else if (EmployerChoice == 5)
                                             {
@@ -354,7 +372,6 @@ namespace Final_Project_x_Boss.Az
                                                 Console.ReadKey(true);
                                                 Console.Clear();
                                                 database.DefaultAdmin.AddProcess(new($"{database.CurrentEmployer!.Username} checked his/her account"));
-
                                             }
                                             else break;
                                         }

@@ -1,35 +1,44 @@
 [
   {
-    "MyCVs": [],
+    "MyCVs": [
+      {
+        "Id": "53479cc7-e921-4019-bacd-1ac868696e9f",
+        "Category": 9,
+        "StartTime": "2023-05-21T19:06:24.0904058+04:00",
+        "EndTime": "2023-06-21T19:06:24.0894572+04:00",
+        "Profession": "dtfdtfdtfd",
+        "School": "ddddd",
+        "Skills": [
+          "d",
+          "r",
+          "e"
+        ],
+        "Companies": [
+          "t",
+          "y",
+          "u"
+        ],
+        "Languages": [
+          "q",
+          "a",
+          "z"
+        ],
+        "HasDiplom": true,
+        "LinkedIn": "yergfyf.linkedin.com",
+        "GitLink": "eygfyf.github.com",
+        "WantingSalary": 1111,
+        "ViewCount": 0,
+        "UniversityAcceptanceGrade": 271,
+        "Package": 0
+      }
+    ],
     "Budget": 4900,
     "Phone": "0503356502",
     "City": "Baku",
     "Id": "31d70488-7870-45a5-938e-a38633d89527",
     "Name": "Hesen",
     "Surname": "Abdullazade",
-    "Notifications": [
-      {
-        "Id": "e9601bbd-2b13-4fec-9e65-80d50b339b4c",
-        "Title": "Good Vacancy",
-        "Content": "Your Vacancy with [0e37374f-b2e2-4c37-bad9-8127390dc470] id accepted by Boss.Az admins",
-        "FromWho": "admin",
-        "SendingTime": "2023-05-19T21:38:56.6862643+04:00"
-      },
-      {
-        "Id": "ae4c26b9-4e51-42a1-a328-06c0fd0b962a",
-        "Title": "Good Vacancy",
-        "Content": "Your Vacancy with [775391f0-2448-4d1a-865b-0e6110af7b2c] id accepted by Boss.Az admins",
-        "FromWho": "admin",
-        "SendingTime": "2023-05-20T11:32:00.5535078+04:00"
-      },
-      {
-        "Id": "2271afa7-972a-4aca-b4ef-8750e50710ec",
-        "Title": "Good Vacancy",
-        "Content": "Your Vacancy with [cdd03c05-1847-4c7c-a6e3-60fd4c1e8e31] id accepted by Boss.Az admins",
-        "FromWho": "admin",
-        "SendingTime": "2023-05-20T11:40:34.3689416+04:00"
-      }
-    ],
+    "Notifications": [],
     "Age": 23,
     "Email": "hasanabdullazad@gmail.com",
     "Password": "2000Hasan",

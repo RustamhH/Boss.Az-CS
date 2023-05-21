@@ -89,43 +89,19 @@ namespace Final_Project_x_Boss.Az.Models
                 Processes.Add(p);
                 SaveProcess();
             }
-
+            
             public void CheckVacancyDeadlines(ref Database database)
             {
-                foreach (var employer in database.Employers)
-                {
-                    foreach (var vacancy in employer.MyVacancies)
-                    {
-                        if(vacancy.EndTime>DateTime.Now)
-                        {
-                            employer.DeleteVacancybyID(vacancy.Id.ToString());
-                            Notification not=new("Expired Vacancy", $"Dear {employer.Username},your vacancy about {vacancy.Category} has been deleted due to expiring by Boss.Az admins", Username);
-                            employer.Notifications.Add(not);
-                            AddProcess(new Process($"Admin {Username} deleted employer {employer.Username}'s  {vacancy.Id} vacancy "));
-                            Functions.SendMail(employer.Email, not);
-                        }
-                    }
-                }
+                database.Employers.ForEach(employer => employer.MyVacancies.RemoveAll(vacancy => vacancy.EndTime <= DateTime.Now));
+                database.SaveEmployers();
             }
             public void CheckCVDeadlines(ref Database database)
             {
-                foreach (var worker in database.Workers)
-                {
-                    foreach (var CV in worker.MyCVs)
-                    {
-                        if(CV.EndTime>DateTime.Now)
-                        {
-                            worker.DeleteCVbyID(CV.Id.ToString());
-                            Notification not = new("Expired CV", $"Dear {worker.Username},your CV about {CV.Category} has been deleted due to expiring by Boss.Az admins", Username);
-                            worker.Notifications!.Add(not);
-                            AddProcess(new Process($"Admin {Username} deleted worker {worker.Username}'s  {CV.Id} CV due to expiring"));
-                            Functions.SendMail(worker.Email, not);
-                        }
-                    }
-                }
+                database.Workers.ForEach(worker => worker.MyCVs.RemoveAll(cv => cv.EndTime <= DateTime.Now));
+                database.SaveWorkers();
             }
 
-            
+
 
 
 
@@ -164,12 +140,14 @@ namespace Final_Project_x_Boss.Az.Models
                                 RequestedVacancies[item.Key].Remove(item1);
                                 if (RequestedVacancies[item.Key].Count == 0) RequestedVacancies.Remove(item.Key);
                                 SaveRequestedVacancies();
+                                Console.Clear();
                                 return;
                             }
                             else
                             {
                                 Console.WriteLine("Employer Not Found");
                                 Console.ReadKey(true);
+                                Console.Clear();
                                 return;
                             }
                         }
@@ -210,12 +188,14 @@ namespace Final_Project_x_Boss.Az.Models
                                 RequestedCV[item.Key].Remove(item1);
                                 if (RequestedCV[item.Key].Count == 0) RequestedCV.Remove(item.Key);
                                 SaveRequestedCVs();
+                                Console.Clear();
                                 return;
                             }
                             else
                             {
                                 Console.WriteLine("Worker Not Found");
                                 Console.ReadKey(true);
+                                Console.Clear();
                                 return;
                             }
 
