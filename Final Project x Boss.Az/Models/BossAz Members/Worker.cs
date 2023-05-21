@@ -14,7 +14,7 @@ namespace Final_Project_x_Boss.Az.Models
 {
     namespace WorkerNamespace
     {
-        internal sealed class Worker : User, IApply
+        internal sealed partial class Worker : User, IApply
         {
             public List<CV> MyCVs { get; set; }
 
@@ -102,24 +102,33 @@ namespace Final_Project_x_Boss.Az.Models
             {
                 MyCVs = new();
             }
+            public partial void CVCreation(ref Database database);
+            public override string ToString()
+            {
+                string Text = base.ToString();
+                Text += $"CV count: {MyCVs.Count}\n";
+                return Text;
+            }
+
+        }
 
 
-            
-
-            public void CVCreation(ref Database database)
+        internal sealed partial class Worker : User, IApply
+        {
+            public partial void CVCreation(ref Database database)
             {
                 int x = 10, y = 2;
-                
+
                 ///////////////////////////////////////////////////////
-                
+
                 Categories category; // +
                 Packages package;
                 DateTime end;
-                string profession, school, gitlink, linkedin, skillinput,companyinput,languagesinput; // +
-                double unigrade,wantingsalary; // +
+                string profession, school, gitlink, linkedin, skillinput, companyinput, languagesinput; // +
+                double unigrade, wantingsalary; // +
                 bool hasdiplom; // +
-                List<string> languages=new(); // +
-                List<string> skills=new(), companies = new(); // +
+                List<string> languages = new(); // +
+                List<string> skills = new(), companies = new(); // +
 
                 ///////////////////////////////////////////////////////
                 int categoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), x, y);
@@ -151,7 +160,7 @@ namespace Final_Project_x_Boss.Az.Models
                 do
                 {
                     Console.Write("Do you have honor diplom? ");
-                } while (!bool.TryParse(Console.ReadLine(),out hasdiplom));
+                } while (!bool.TryParse(Console.ReadLine(), out hasdiplom));
 
                 do
                 {
@@ -163,7 +172,7 @@ namespace Final_Project_x_Boss.Az.Models
                 {
                     Console.WriteLine("Companies (separated by commas): ");
                     companyinput = Console.ReadLine();
-                } while (companyinput == null || companyinput == ""); 
+                } while (companyinput == null || companyinput == "");
                 companies = companyinput.Split(',').Select(company => company.Trim()).ToList();
 
                 do
@@ -207,9 +216,9 @@ namespace Final_Project_x_Boss.Az.Models
                 CV cv;
                 try
                 {
-                    cv = new(category, school, unigrade, skills, companies, languages, hasdiplom, profession, gitlink, linkedin, wantingsalary, package,end);
+                    cv = new(category, school, unigrade, skills, companies, languages, hasdiplom, profession, gitlink, linkedin, wantingsalary, package, end);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.ReadKey(true);
@@ -217,16 +226,7 @@ namespace Final_Project_x_Boss.Az.Models
                     return;
                 }
                 database.DefaultAdmin!.Notifications!.Add(new("New CV Creation", $"{Username} created a new CV.Check your requests to verify this CV", Username));
-                database.DefaultAdmin!.AddRequestedCV(Id,cv);
-            }
-
-
-
-            public override string ToString()
-            {
-                string Text = base.ToString();
-                Text += $"CV count: {MyCVs.Count}\n";
-                return Text;
+                database.DefaultAdmin!.AddRequestedCV(Id, cv);
             }
 
         }

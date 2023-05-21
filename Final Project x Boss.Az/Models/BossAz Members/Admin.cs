@@ -21,7 +21,10 @@ namespace Final_Project_x_Boss.Az.Models
 {
     namespace AdminNamespace
     {
-        internal sealed class Admin : Person
+
+
+        // PROTOTYPES
+        internal sealed partial class Admin : Person
         {
             public List<Process> Processes { get; set; }
             public Dictionary<Guid,List<Vacancy>> RequestedVacancies { get; set; }
@@ -38,35 +41,63 @@ namespace Final_Project_x_Boss.Az.Models
                 SetRequestedVacanciesFromFile();
                 SetProcessesFromFile();
             }
+            public partial void SaveRequestedVacancies();
+            public partial void SaveRequestedCVs();
+            public partial void SaveProcess();
+            public partial void SetProcessesFromFile();
+            public partial void SetRequestedVacanciesFromFile();
+            public partial void SetRequestedCVsFromFile();
+            public partial void ShowProcesses();
+            public partial void AddProcess(Process p);
+            public partial void CheckVacancyDeadlines(ref Database database);
+            public partial void CheckCVDeadlines(ref Database database);
+            public partial void CheckVacancy(ref Database database, string vacancyid);
+            public partial void CheckCv(ref Database database, string cvid);
+            public partial void ShowRequestedVacancies();
+            public partial void ShowRequestedCVs();
+            public partial void AddRequestedCV(Guid guid, CV cv);
+            public partial void AddRequestedVacancies(Guid guid, Vacancy vac);
+
+        }
 
 
-            
-            public void SaveRequestedVacancies()
+
+
+
+
+
+
+        // FUNCTIONS
+
+        internal sealed partial class Admin: Person
+        {
+            public partial void SaveRequestedVacancies()
             {
                 JsonFileHandler.Write("Requested Vacancies.json", RequestedVacancies);
             }
-            public void SaveRequestedCVs()
+            public partial void SaveRequestedCVs()
             {
                 JsonFileHandler.Write("Requested CVs.json", RequestedCV);
             }
 
-            
 
 
-            public void SaveProcess()
+
+            public partial void SaveProcess()
             {
                 JsonFileHandler.Write("Processes.json", Processes);
             }
 
-            public void SetProcessesFromFile()
+            public partial void SetProcessesFromFile()
             {
                 Processes = JsonFileHandler.Read<List<Process>>("Processes.json");
             }
-            
-            public void SetRequestedVacanciesFromFile() {
+
+            public partial void SetRequestedVacanciesFromFile()
+            {
                 RequestedVacancies = JsonFileHandler.Read<Dictionary<Guid, List<Vacancy>>>("Requested Vacancies.json");
             }
-            public void SetRequestedCVsFromFile()
+            public partial void SetRequestedCVsFromFile()
             {
                 RequestedCV = JsonFileHandler.Read<Dictionary<Guid, List<CV>>>("Requested CVs.json");
             }
@@ -74,7 +105,7 @@ namespace Final_Project_x_Boss.Az.Models
 
 
 
-            public void ShowProcesses()
+            public partial void ShowProcesses()
             {
                 foreach (var item in Processes)
                 {
@@ -84,18 +115,18 @@ namespace Final_Project_x_Boss.Az.Models
 
 
 
-            public void AddProcess(Process p)
+            public partial void AddProcess(Process p)
             {
                 Processes.Add(p);
                 SaveProcess();
             }
-            
-            public void CheckVacancyDeadlines(ref Database database)
+
+            public partial void CheckVacancyDeadlines(ref Database database)
             {
                 database.Employers.ForEach(employer => employer.MyVacancies.RemoveAll(vacancy => vacancy.EndTime <= DateTime.Now));
                 database.SaveEmployers();
             }
-            public void CheckCVDeadlines(ref Database database)
+            public partial void CheckCVDeadlines(ref Database database)
             {
                 database.Workers.ForEach(worker => worker.MyCVs.RemoveAll(cv => cv.EndTime <= DateTime.Now));
                 database.SaveWorkers();
@@ -107,9 +138,9 @@ namespace Final_Project_x_Boss.Az.Models
 
 
 
-            public void CheckVacancy(ref Database database,string vacancyid)
+            public partial void CheckVacancy(ref Database database, string vacancyid)
             {
-                
+
                 foreach (var item in RequestedVacancies)
                 {
                     foreach (var item1 in item.Value)
@@ -152,10 +183,10 @@ namespace Final_Project_x_Boss.Az.Models
                             }
                         }
                     }
-                    
+
                 }
             }
-            public void CheckCv(ref Database database,string cvid)
+            public partial void CheckCv(ref Database database, string cvid)
             {
                 foreach (var item in RequestedCV)
                 {
@@ -209,17 +240,17 @@ namespace Final_Project_x_Boss.Az.Models
 
 
 
-            public void ShowRequestedVacancies()
+            public partial void ShowRequestedVacancies()
             {
                 foreach (var item in RequestedVacancies)
                 {
                     foreach (var item1 in item.Value)
                     {
-                        Console.WriteLine("Owner: "+item.Key+"\n"+item1);
+                        Console.WriteLine("Owner: " + item.Key + "\n" + item1);
                     }
                 }
             }
-            public void ShowRequestedCVs()
+            public partial void ShowRequestedCVs()
             {
                 foreach (var item in RequestedCV)
                 {
@@ -230,9 +261,7 @@ namespace Final_Project_x_Boss.Az.Models
                 }
             }
 
-
-
-            public void AddRequestedCV(Guid guid,CV cv)
+            public partial void AddRequestedCV(Guid guid, CV cv)
             {
                 if (RequestedCV.ContainsKey(guid))
                 {
@@ -243,9 +272,9 @@ namespace Final_Project_x_Boss.Az.Models
                     RequestedCV.Add(guid, new() { cv });
                 }
                 SaveRequestedCVs();
-                
+
             }
-            public void AddRequestedVacancies(Guid guid,Vacancy vac)
+            public partial void AddRequestedVacancies(Guid guid, Vacancy vac)
             {
                 if (RequestedVacancies.ContainsKey(guid))
                 {
@@ -257,10 +286,9 @@ namespace Final_Project_x_Boss.Az.Models
                 }
                 SaveRequestedVacancies();
             }
-
-
         }
     }
+
 
    
 }

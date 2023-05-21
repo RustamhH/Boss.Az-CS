@@ -15,7 +15,7 @@ namespace Final_Project_x_Boss.Az.Models
 {
     namespace EmployerNamespace
     {
-        internal sealed class Employer : User, IApply
+        internal sealed partial class Employer : User, IApply
         {
             public List<Vacancy> MyVacancies { get; set; }
 
@@ -43,99 +43,7 @@ namespace Final_Project_x_Boss.Az.Models
             }
 
 
-            public void VacancyCreation(ref Database database)
-            {
-                
-                int x = 10, y = 2;
-                //////////////////////////
-                
-                
-                Categories category;
-                Packages package;
-                DateTime end;
-                string profession,degree,req;
-                double salary;
-                ushort minage, maxage;
-                int experincetime;
-                //////////////////////////
-                
-                int categoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(),x,y);
-                Enum.TryParse(categoryChoice.ToString(), out category);
-                Console.ForegroundColor = ConsoleColor.White;
-                do
-                {
-                    Console.Write("What profession should our applyer have? ");
-                    profession = Console.ReadLine();
-                } while (profession == null || profession == "");
-                
-                do
-                {
-                    Console.Write("How much salary do you offer to our applyer? ");
-                } while (!double.TryParse(Console.ReadLine(), out salary));
-
-                do
-                {
-                    do
-                    {
-                        Console.Write("What age should be our applyer (minimum age) ? ");
-                    } while (!ushort.TryParse(Console.ReadLine(), out minage));
-                    do
-                    {
-                        Console.Write("What age should be our applyer (maximum age) ? ");
-                    } while (!ushort.TryParse(Console.ReadLine(), out maxage));
-
-                } while (maxage<minage);
-
-                do
-                {
-                    Console.Write("What education degree should our applyer have? ");
-                    degree = Console.ReadLine();
-                } while (degree == null || degree == "");
-
-                do
-                {
-                    Console.Write("At least how much experienced should our applyer be (enter year count) ? ");
-                } while (!int.TryParse(Console.ReadLine(), out experincetime));
-
-                do
-                {
-                    Console.Write("Lastly , Enter your requirements: ");
-                    req = Console.ReadLine();
-                } while (req == null || req == "");
-                Console.Clear();
-                int PackageChoice = Print(new List<string> { "Normal [1 month]", "Premium [1 year]" },x,y);
-                if(PackageChoice==0)
-                {
-                    if (Budget < 10) return;
-                    Budget -= 10;
-                    package = Packages.Basic;
-                    end = DateTime.Now.AddMonths(1);
-                }
-                else
-                {
-                    if (Budget < 50) return;
-                    Budget -= 50;
-                    package = Packages.Premium;
-                    end = DateTime.Now.AddYears(1);
-                    
-                }
-                Vacancy vacancy;
-                try
-                {
-                    vacancy = new(category, profession, salary, req, minage, maxage, degree, experincetime,package,end);
-                }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    Console.ReadKey(true);
-                    Console.Clear();
-                    return;
-                }
-                // admine notification gedib yoxlanilmali,eger admin qebul etse liste elave olunur,
-                // employere mail ve notification gedir , processlere elave olunur.
-                database.DefaultAdmin!.Notifications!.Add(new("New Vacancy Creation", $"{Username} created a new vacancy.Check your requests to verify this vacancy", Username));
-                database.DefaultAdmin!.AddRequestedVacancies(Id,vacancy);
-            }
+            public partial void VacancyCreation(ref Database database);
 
 
 
@@ -188,6 +96,113 @@ namespace Final_Project_x_Boss.Az.Models
                 return Text;
             }
         }
+
+
+
+
+
+
+
+
+        internal sealed partial class Employer : User, IApply
+        {
+            public partial void VacancyCreation(ref Database database)
+            {
+
+                int x = 10, y = 2;
+                //////////////////////////
+
+
+                Categories category;
+                Packages package;
+                DateTime end;
+                string profession, degree, req;
+                double salary;
+                ushort minage, maxage;
+                int experincetime;
+                //////////////////////////
+
+                int categoryChoice = Print(Enum.GetNames(typeof(Categories)).ToList(), x, y);
+                Enum.TryParse(categoryChoice.ToString(), out category);
+                Console.ForegroundColor = ConsoleColor.White;
+                do
+                {
+                    Console.Write("What profession should our applyer have? ");
+                    profession = Console.ReadLine();
+                } while (profession == null || profession == "");
+
+                do
+                {
+                    Console.Write("How much salary do you offer to our applyer? ");
+                } while (!double.TryParse(Console.ReadLine(), out salary));
+
+                do
+                {
+                    do
+                    {
+                        Console.Write("What age should be our applyer (minimum age) ? ");
+                    } while (!ushort.TryParse(Console.ReadLine(), out minage));
+                    do
+                    {
+                        Console.Write("What age should be our applyer (maximum age) ? ");
+                    } while (!ushort.TryParse(Console.ReadLine(), out maxage));
+
+                } while (maxage < minage);
+
+                do
+                {
+                    Console.Write("What education degree should our applyer have? ");
+                    degree = Console.ReadLine();
+                } while (degree == null || degree == "");
+
+                do
+                {
+                    Console.Write("At least how much experienced should our applyer be (enter year count) ? ");
+                } while (!int.TryParse(Console.ReadLine(), out experincetime));
+
+                do
+                {
+                    Console.Write("Lastly , Enter your requirements: ");
+                    req = Console.ReadLine();
+                } while (req == null || req == "");
+                Console.Clear();
+                int PackageChoice = Print(new List<string> { "Normal [1 month]", "Premium [1 year]" }, x, y);
+                if (PackageChoice == 0)
+                {
+                    if (Budget < 10) return;
+                    Budget -= 10;
+                    package = Packages.Basic;
+                    end = DateTime.Now.AddMonths(1);
+                }
+                else
+                {
+                    if (Budget < 50) return;
+                    Budget -= 50;
+                    package = Packages.Premium;
+                    end = DateTime.Now.AddYears(1);
+
+                }
+                Vacancy vacancy;
+                try
+                {
+                    vacancy = new(category, profession, salary, req, minage, maxage, degree, experincetime, package, end);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.ReadKey(true);
+                    Console.Clear();
+                    return;
+                }
+                // admine notification gedib yoxlanilmali,eger admin qebul etse liste elave olunur,
+                // employere mail ve notification gedir , processlere elave olunur.
+                database.DefaultAdmin!.Notifications!.Add(new("New Vacancy Creation", $"{Username} created a new vacancy.Check your requests to verify this vacancy", Username));
+                database.DefaultAdmin!.AddRequestedVacancies(Id, vacancy);
+            }
+
+        }
+
+
     }
     
 }
