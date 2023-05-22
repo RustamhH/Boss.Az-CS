@@ -29,5 +29,36 @@
     "Email": "rustamh2006@gmail.com",
     "Password": "rustamchik",
     "Username": "RustamH"
+  },
+  {
+    "MyVacancies": [
+      {
+        "Applyers": [],
+        "Category": 6,
+        "Id": "d8d508f0-6636-411b-9637-9db0dbd3ce2a",
+        "StartTime": "2023-05-22T18:40:34.8833079+04:00",
+        "EndTime": "2023-06-22T18:40:34.8830633+04:00",
+        "Profession": "Lawyer",
+        "Requirements": "hefteici 5 gu 7/24 ",
+        "MinimumAge": 75,
+        "MaximumAge": 80,
+        "Degree": "ali",
+        "Package": 0,
+        "ViewCount": 0,
+        "ExperienceTime": 2,
+        "OfferedSalary": 50
+      }
+    ],
+    "Budget": 2000,
+    "Phone": "0513940859",
+    "City": "Baku",
+    "Id": "65a94946-4449-4dd0-8f34-77339b83bc9c",
+    "Name": "Sia",
+    "Surname": "Jabbarova",
+    "Notifications": [],
+    "Age": 20,
+    "Email": "siajabbarova@gmail.com",
+    "Password": "siasiasia",
+    "Username": "sia"
   }
 ]
