@@ -90,16 +90,49 @@ namespace Final_Project_x_Boss.Az.Models
 
             public partial void SetProcessesFromFile()
             {
-                Processes = JsonFileHandler.Read<List<Process>>("Processes.json");
+                try
+                {
+                    Processes = JsonFileHandler.Read<List<Process>>("Processes.json");
+                }
+                catch when (Processes==null)
+                {
+                    Processes = new();
+                }
+                catch(Exception ex)
+                {
+
+                }
             }
 
             public partial void SetRequestedVacanciesFromFile()
             {
-                RequestedVacancies = JsonFileHandler.Read<Dictionary<Guid, List<Vacancy>>>("Requested Vacancies.json");
+                try
+                {
+                    RequestedVacancies=  JsonFileHandler.Read<Dictionary<Guid, List<Vacancy>>>("Requested Vacancies.json");
+                }
+                catch when (RequestedVacancies == null)
+                {
+                    RequestedVacancies = new();
+                }
+                catch(Exception ex)
+                {
+
+                }
             }
             public partial void SetRequestedCVsFromFile()
             {
-                RequestedCV = JsonFileHandler.Read<Dictionary<Guid, List<CV>>>("Requested CVs.json");
+                try
+                {
+                    RequestedCV=  JsonFileHandler.Read<Dictionary<Guid, List<CV>>>("Requested CVs.json");
+                }
+                catch when (RequestedCV == null)
+                {
+                    RequestedCV = new();
+                }
+                catch(Exception ex)
+                {
+
+                }
             }
 
 

@@ -89,11 +89,33 @@ namespace Final_Project_x_Boss.Az.Models.Other
     {
         public partial void SetWorkers()
         {
-            Workers = JsonFileHandler.Read<List<Worker>>("Workers.json");
+            try
+            {
+                Workers = JsonFileHandler.Read<List<Worker>>("Workers.json");
+            }
+            catch when (Workers==null)
+            {
+                Workers = new();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
         public partial void SetEmployers()
         {
-            Employers = JsonFileHandler.Read<List<Employer>>("Employers.json");
+            try
+            {
+                Employers = JsonFileHandler.Read<List<Employer>>("Employers.json");
+            }
+            catch when (Employers==null)
+            {
+                Employers = new();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
         public partial void SaveWorkers()
         {

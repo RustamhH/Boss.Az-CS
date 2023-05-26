@@ -12,19 +12,14 @@ namespace Final_Project_x_Boss.Az.Models.Other
     internal sealed class JsonFileHandler
     {
 
-        public static T Read<T>(string filePath)
+        public static T Read<T>(string filePath) where T:new()
         {
-            try
-            {
-                JsonSerializerOptions op = new JsonSerializerOptions();
-                using FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate);
-                return JsonSerializer.Deserialize<T>(fs,op);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return default(T);
-            }
+            
+            JsonSerializerOptions op = new JsonSerializerOptions();
+            using FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate);
+            return JsonSerializer.Deserialize<T>(fs, op);
+            
+            
         }
         public static void Write<T>(string filePath, T values)
         {
