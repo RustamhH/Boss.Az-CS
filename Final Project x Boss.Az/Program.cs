@@ -196,6 +196,7 @@ namespace Final_Project_x_Boss.Az
                                     {
                                         Console.WriteLine(database.CurrentAdmin!);
                                         database.CurrentAdmin!.AddProcess(new($"{database.CurrentAdmin.Username} checked his account"));
+                                        Console.ReadKey(true);
                                         Console.Clear();
                                     }
                                     else break;
